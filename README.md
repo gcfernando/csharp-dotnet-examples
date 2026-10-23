@@ -88,7 +88,7 @@ Start Functions with `func start` from the function project folder after its loc
 
 ## 🏗️ Architecture
 
-Folders isolate the examples. `Fake`, `SQLWrites` and `Mediat` contain multiple projects and solution files; `Durable` and `Middleware` group several independently hosted apps. Most other folders contain one console or desktop application. The `.csproj` files are the source of truth for target frameworks and packages.
+Folders isolate the examples. `Fake`, `SQLWrites` and `Mediat` contain multiple projects and solution files; `Durable` and `Middleware` group several independently hosted apps. Most other folders contain one console or desktop application. The `.csproj` files are the source of truth for target frameworks and packages. Some solutions have x64-only or incomplete configuration mappings; see the Durable DemoOne and MediatR guides. Tracked `SQLWrites/UseTvp/bin` and `obj` files are historical generated outputs and dependencies, not a substitute for building the selected source.
 
 The `_config.yml`, `_layouts` and `assets` folders support the documentation site, independently of the C# applications.
 

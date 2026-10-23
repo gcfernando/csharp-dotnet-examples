@@ -89,7 +89,7 @@ func start --port 7094
 | Behaviour | Description |
 |---|---|
 | `LoggingBehavior<TRequest, TResponse>` | Logs `Handling {request type}` before and `Handled {response type}` after each handler call |
-| `PerformanceMonitoringBehavior<TRequest, TResponse>` | Logs a warning if handler execution exceeds 500 ms |
+| `PerformanceMonitoringBehavior<TRequest, TResponse>` | Logs a warning after a successful downstream return when elapsed time exceeds 500 ms; thrown failures bypass that warning |
 
 ### Data Storage
 
@@ -163,7 +163,7 @@ Mediat/
 
 ## 🧪 Development and testing
 
-Check restore/build compatibility for `Mediat/Mediat.sln`, then test create, get, missing ID and restart behavior in a local Functions host. Package references and handlers were inspected; restore, host execution and concurrent requests were not tested here.
+Check restore/build compatibility for `Mediat/Mediat.sln` with its `x64` solution platform, then test create, get, missing ID and restart behavior in a local Functions host. The Release solution configuration lacks a `Build.0` entry for `Mediat.Infrastructure`; inspect Configuration Manager and project-reference build behavior before treating a solution build as evidence for every project. Package references and handlers were inspected; restore, host execution and concurrent requests were not tested here.
 
 ## 🛠️ Troubleshooting and limitations
 

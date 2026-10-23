@@ -11,7 +11,7 @@ A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one usin
 | `WithMiddleware` | 7052 | Registers `UppercaseNameMiddleware`; name is uppercased in middleware before reaching the handler |
 | `WithoutMiddleware` | 7162 | In-process model (`Microsoft.NET.Sdk.Functions`), no middleware; the raw `name` field from the JSON body is used as-is |
 
-Middleware is a feature of the isolated worker model, which is why the baseline project uses the in-process model.
+This comparison also changes the hosting model: it is not a comparison of two otherwise identical apps with just one middleware registration removed. An isolated worker app can also run without custom middleware.
 
 ## 🚀 Quick start
 

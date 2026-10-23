@@ -110,7 +110,7 @@ DemoOne/
 
 ## 🧪 Development and testing
 
-From the repository root, build with `dotnet build Durable/DemoOne/DemoOne.csproj`. In a configured local host, verify the greeting value, exact HTTP encoding and empty-body 400 response. Source and paths were checked; host execution was not performed.
+From the repository root, build with `dotnet build Durable/DemoOne/DemoOne.csproj -p:Platform=x64`. The project declares only the `x64` platform; its solution's Any CPU configurations map to x64 but omit the corresponding `Build.0` entries, so select x64 or build the project explicitly when verifying it. In a configured local host, verify the greeting value, exact HTTP encoding and empty-body 400 response. Source and paths were checked; host execution was not performed.
 
 ## 🛠️ Troubleshooting and limitations
 

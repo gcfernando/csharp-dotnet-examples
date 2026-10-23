@@ -28,7 +28,7 @@ Use this index to find the relevant framework, dependencies and limitations befo
 | [SemaphoreSlim](SemaphoreSlim/readme.md) | Simulated work and worker-seeding limitation |
 | [Azure OpenAI SDK / REST](Simple_ChatCompletion/readme.md) | Compile-time credentials/settings and unvalidated model output |
 | [Spectre.Console](SpectreDemo/readme.md) | Interactive terminal and simulated progress |
-| [SQL Server upserts](SQLWrites/readme.md) | .NET 10, disposable database and retry overload differences |
+| [SQL Server upserts](SQLWrites/readme.md) | .NET 10, disposable database, TVP key uniqueness, retry overload differences and bulk recovery boundaries |
 | [Task.WhenAll failures](TaskErrors/readme.md) | Inspecting all task exceptions |
 | [Unsafe.As](UnsafeAs/readme.md) | Memory layout and little-endian output assumptions |
 | [High-DPI WinForms](FourKWinForm/README.md) | Windows and system DPI awareness |

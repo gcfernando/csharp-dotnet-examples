@@ -14,13 +14,13 @@ There are two versions: a **.NET 6** comparison of the same function written wit
 | [Dotnet6/WithMiddleware](https://github.com/gcfernando/csharp_codes/tree/main/Middleware/Dotnet6/WithMiddleware) | .NET 6, Functions v4 | Isolated worker | `UppercaseNameMiddleware` parses and uppercases the `name` before the function runs |
 | [Dotnet8/Middleware](https://github.com/gcfernando/csharp_codes/tree/main/Middleware/Dotnet8/Middleware) | .NET 8, Functions v4 | Isolated worker (ASP.NET Core integration) | `UppercaseNameMiddleware` plus `ExceptionHandlerMiddleware` and a custom error-response utility |
 
-Middleware is only available in the isolated worker model, which is why the .NET 6 baseline uses the in-process model for comparison.
+The custom worker middleware API used here belongs to the isolated worker model. The .NET 6 examples also differ in hosting model; an isolated app can run without registering custom middleware.
 
 ## 🚀 Quick start
 
 ### Quick Start
 
-From the repository root:
+From the repository root, use a separate terminal for each command group (or return to the root before switching projects):
 
 ```bash
 # .NET 6 demo (isolated worker with middleware)
@@ -81,7 +81,7 @@ Build and host only one project at a time. Compare the .NET 6 baseline with the 
 
 ## 🛠️ Troubleshooting and limitations
 
-Create an untracked `local.settings.json` in the chosen function project: set `AzureWebJobsStorage` to `UseDevelopmentStorage=true`, and use `FUNCTIONS_WORKER_RUNTIME=dotnet-isolated` for isolated projects or `dotnet` for the .NET 6 in-process baseline. Start Azurite for that storage setting. Commands below are independent examples from the repository root; use separate terminals or return to the root before switching projects.
+Create an untracked `local.settings.json` in the chosen function project: set `AzureWebJobsStorage` to `UseDevelopmentStorage=true`, and use `FUNCTIONS_WORKER_RUNTIME=dotnet-isolated` for isolated projects or `dotnet` for the .NET 6 in-process baseline. Start Azurite for that storage setting. The quick-start commands are independent examples from the repository root.
 
 ## 🔗 Related documentation
 

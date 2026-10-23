@@ -88,7 +88,7 @@ Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than
 
 - Builds a `DataTable` from a list of events
 - Passes it as a Table-Valued Parameter to `dbo.UpsertCustomerActivityEventsType`
-- The stored procedure deduplicates, updates stale rows, and inserts new ones in a single transaction
+- The stored procedure stages input, updates older stored rows, and inserts new events in a single transaction. The TVP type declares `event_id` as its primary key: duplicate IDs must be resolved before sending the parameter; the procedure's `ROW_NUMBER` step does not make duplicate TVP keys acceptable.
 
 #### 3. Bulk Staging — `UseBulk`
 
@@ -136,7 +136,7 @@ SQLWrites/
 
 ## 🧪 Development and testing
 
-A non-executing build is `dotnet build SQLWrites/SQLWrites.sln` from the repository root. Validate schema and behavior only against a disposable database. This documentation review did not run SQL scripts or database writers.
+A build that does not run the writers is `dotnet build SQLWrites/SQLWrites.sln` from the repository root. Validate schema and behavior only against a disposable database. Include duplicate IDs, equal/older timestamps, mismatched row versions, partial bulk-copy failure and retries after an uncertain commit. This documentation review did not run SQL scripts or database writers.
 
 ## 🛠️ Troubleshooting and limitations
 
@@ -152,6 +152,16 @@ Without those hints, two concurrent sessions can both see that a row is missing 
 Both overloads recognize selected transient SQL errors, including deadlock 1205 and timeout -2. The non-generic overload uses exponential backoff with jitter; the generic overload uses linear delays and a different attempt count. See the retry-policy section above.
 
 Use a disposable database. Query.sql creates/alters schema and drops/recreates an existing index, procedure and table type. The normal demo generates one event, TVP 2,000, and bulk 200,000; these are input sizes, not measured performance. Connection strings are hard-coded in each Program.cs and are not read from environment variables. Re-running the demos generates fresh event IDs and adds rows.
+
+### Concurrency and retry boundaries
+
+`ExpectedRowVersion` is optional: an empty array becomes SQL `NULL`, bypassing the row-version match. For an existing event, equal or older timestamps cause no update. `RowVersion` is carried by the record but none of the writers reads a fresh version back into it. The Normal and TVP methods return no conflict detail; the Bulk method returns counts while discarding the procedure's conflict result rows. Successful completion therefore does not mean every supplied event changed a row.
+
+Bulk copy uses its own transactions for batches of 50,000, followed by a separate reconciliation transaction. These steps do not form one transaction. A failure can leave committed staging rows, and the retry reuses its batch ID and enumerates the input again. `StreamEvents()` in the demo creates new GUIDs and timestamps on each enumeration, so a retry can represent different events from its first attempt. For adaptation, define stable event identities, repeatable input and a staging recovery/cleanup policy; this code has not demonstrated exactly-once processing.
+
+The reconciliation query reads staging rows with `READPAST` and then deletes rows for the batch ID. Concurrent loading/reconciliation of the same batch requires separate review; do not infer that the sample implements a queue, row claiming or a recovery protocol. Conflict detection and update are separate statements, and their behavior under competing writers was not runtime-verified.
+
+`SQLWrites/UseTvp/bin` and `obj` contain tracked build outputs, dependency DLLs and caches in this checkout. Use the project/source files for builds and review; the committed outputs do not establish that the current source has passed validation.
 
 ## 🔗 Related documentation
 

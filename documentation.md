@@ -49,7 +49,7 @@ The sections below retain the site's generated page/source navigation for publis
 <tr><td><a href="{{ guide.url | absolute_url }}">{{ guide.title | default: guide.name | escape }}</a></td><td><a href="https://github.com/{{ site.repository }}/blob/main/{{ guide.path | uri_escape }}">View source</a></td></tr>
 {% endif %}{% endfor %}
 {% for guide in site.static_files %}{% if guide.extname == '.html' and guide.sitemap != false %}
-<tr><td><a href="{{ guide.path | replace: '/index.html', '/' | absolute_url }}">{% if guide.path == '/Linux_Commands/index.html' %}Linux Command Reference{% elsif guide.path contains 'ai_coding_plugins_beginners_guide' %}AI Coding Add-ons: Beginner’s Guide{% else %}{{ guide.name | escape }} — {{ guide.path | escape }}{% endif %}</a></td><td><a href="https://github.com/{{ site.repository }}/blob/main{{ guide.path | uri_escape }}">View HTML source</a></td></tr>
+<tr><td><a href="{{ guide.path | uri_escape | absolute_url }}">{% if guide.path == '/Linux_Commands/index.html' %}Linux Command Reference{% elsif guide.path contains 'AI-Learning-Atlas' %}AI Learning Atlas{% elsif guide.path contains 'ai_coding_plugins_beginners_guide' %}AI Coding Add-ons: Beginner’s Guide{% elsif guide.path contains 'Wifi Radar' %}WiFi Radar — static interface preview{% else %}{{ guide.name | escape }} — {{ guide.path | escape }}{% endif %}</a></td><td><code>{{ guide.path | escape }}</code></td></tr>
 {% endif %}{% endfor %}
 </tbody>
 </table>

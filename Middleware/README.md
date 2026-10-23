@@ -4,7 +4,9 @@ Runnable C# examples of **Azure Functions middleware** with `IFunctionsWorkerMid
 
 There are two versions: a **.NET 6** comparison of the same function written with and without middleware, and a **.NET 8** project that combines request-transforming middleware with exception-handling middleware.
 
-## Structure
+## ✨ Features
+
+### Structure
 
 | Folder | Target | Hosting model | Description |
 |---|---|---|---|
@@ -14,7 +16,36 @@ There are two versions: a **.NET 6** comparison of the same function written wit
 
 Middleware is only available in the isolated worker model, which is why the .NET 6 baseline uses the in-process model for comparison.
 
-## What Is Azure Functions Middleware?
+## 🚀 Quick start
+
+### Quick Start
+
+From the repository root:
+
+```bash
+# .NET 6 demo (isolated worker with middleware)
+cd Middleware/Dotnet6/WithMiddleware
+func start --port 7052
+
+# .NET 8 demo
+cd Middleware/Dotnet8/Middleware
+func start --port 7256
+```
+
+The ports match each project's `launchSettings.json`, so running from Visual Studio uses the same addresses. Send a JSON body with a `name` property in a `POST` request to the function URL that `func start` prints.
+
+See each sub-folder's readme ([.NET 6](./Dotnet6/readme.md), [.NET 8](./Dotnet8/readme.md)) for detailed usage and sample requests.
+
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) and/or [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) v4
+
+## 💡 Usage
+
+### What Is Azure Functions Middleware?
 
 In the isolated worker model, middleware is a class that implements `IFunctionsWorkerMiddleware` and is registered in `Program.cs`. It runs for every function invocation and can execute code before and after the function handler. Middleware can read and modify the `FunctionContext`, read the HTTP request body, add values to `context.Items`, and catch exceptions thrown further down the pipeline.
 
@@ -34,7 +65,7 @@ var host = new HostBuilder()
     .Build();
 ```
 
-## How the .NET 8 Example Works
+### How the .NET 8 Example Works
 
 Middleware runs in the order it is registered:
 
@@ -44,30 +75,17 @@ Middleware runs in the order it is registered:
 
 Because `ExceptionHandlerMiddleware` is registered after `UppercaseNameMiddleware`, it handles exceptions from the function, not exceptions raised inside `UppercaseNameMiddleware` itself (for example, a request body that is not valid JSON).
 
-## Requirements
+## 🧪 Development and testing
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) and/or [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) v4
+Build and host only one project at a time. Compare the .NET 6 baseline with the isolated version using the same name; for .NET 8, test both a missing name and malformed JSON to observe the exception-handler boundary. No Functions host was launched in this review.
 
-## Quick Start
+## 🛠️ Troubleshooting and limitations
 
-From the repository root:
+Create an untracked `local.settings.json` in the chosen function project: set `AzureWebJobsStorage` to `UseDevelopmentStorage=true`, and use `FUNCTIONS_WORKER_RUNTIME=dotnet-isolated` for isolated projects or `dotnet` for the .NET 6 in-process baseline. Start Azurite for that storage setting. Commands below are independent examples from the repository root; use separate terminals or return to the root before switching projects.
 
-```bash
-# .NET 6 demo (isolated worker with middleware)
-cd Middleware/Dotnet6/WithMiddleware
-func start --port 7052
+## 🔗 Related documentation
 
-# .NET 8 demo
-cd Middleware/Dotnet8/Middleware
-func start --port 7256
-```
-
-The ports match each project's `launchSettings.json`, so running from Visual Studio uses the same addresses. Send a JSON body with a `name` property in a `POST` request to the function URL that `func start` prints.
-
-See each sub-folder's readme ([.NET 6](./Dotnet6/readme.md), [.NET 8](./Dotnet8/readme.md)) for detailed usage and sample requests.
-
-## Related Examples
+### Related Examples
 
 - [Keyed dependency injection in Azure Functions](../KeyedService/)
 - [MediatR and CQRS in Azure Functions](../Mediat/)
@@ -76,6 +94,6 @@ See each sub-folder's readme ([.NET 6](./Dotnet6/readme.md), [.NET 8](./Dotnet8/
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

@@ -2,58 +2,24 @@
 
 An Azure Functions v4 project on .NET 8 that demonstrates two **isolated worker middleware** components working together: `UppercaseNameMiddleware` transforms the request body before the handler, and `ExceptionHandlerMiddleware` catches exceptions thrown by the function and returns a structured `ProblemDetails` response with HTTP 400 — a reusable pattern for **global exception handling in Azure Functions**.
 
-## Middleware Pipeline
+## 🚀 Quick start
 
-Middleware runs in the order it is registered in `Program.cs` (`UseMiddleware<UppercaseNameMiddleware>()` first, then `UseMiddleware<ExceptionHandlerMiddleware>()`):
+### Running Locally
 
-```text
-HTTP Request
-     │
-     ▼
-UppercaseNameMiddleware      ← reads body, uppercases "name", stores in context.Items
-     │
-     ▼
-ExceptionHandlerMiddleware   ← wraps the function; catches its exceptions, returns 400 ProblemDetails
-     │
-     ▼
-SendMessageFunction          ← reads updated_body; throws InvalidProcessException if name not found
+```bash
+cd Middleware/Dotnet8/Middleware
+func start --port 7256
 ```
 
-Because `ExceptionHandlerMiddleware` is registered second, it does not catch exceptions raised inside `UppercaseNameMiddleware` (for example, a request body that is not valid JSON). Register it first if you want it to wrap the whole pipeline.
+## 📦 Prerequisites and installation
 
-## Components
-
-### UppercaseNameMiddleware
-
-- Copies the request body into a `MemoryStream` and reads the JSON from that copy
-- Parses JSON and uppercases the `name` property (or sets it to `"name not found"` if absent)
-- Stores the result in `context.Items["updated_body"]`
-- Calls `next.Invoke(context)` to continue the pipeline
-
-### ExceptionHandlerMiddleware
-
-- Wraps `await next.Invoke(context)` in a try/catch
-- On exception, logs the error with `FunctionUtility.LogCustomException` (title, message, inner exception, stack trace)
-- Calls `FunctionUtility.CreateErrorResponse` to write a `ProblemDetails` JSON response with HTTP 400
-- Handles both `$return` and named output bindings
-
-### SendMessageFunction
-
-- Reads `context.Items["updated_body"]` for the transformed name
-- Throws `InvalidProcessException("name not found")` if the name was not found in the original body
-- Returns `Hello {name}.` on success
-
-### InvalidProcessException
-
-Custom exception class with an optional `ProcessName` property, used to signal that the name field was missing or invalid.
-
-## Requirements
+### Requirements
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - A `local.settings.json` in the project folder (not committed to source control)
 
-### Minimum `local.settings.json`
+#### Minimum `local.settings.json`
 
 ```json
 {
@@ -65,7 +31,7 @@ Custom exception class with an optional `ProcessName` property, used to signal t
 }
 ```
 
-## NuGet Packages
+### NuGet Packages
 
 | Package | Version |
 |---|---|
@@ -77,14 +43,9 @@ Custom exception class with an optional `ProcessName` property, used to signal t
 | `Microsoft.Azure.Functions.Worker.ApplicationInsights` | 1.2.0 |
 | `Newtonsoft.Json` | 13.0.3 |
 
-## Running Locally
+## 💡 Usage
 
-```bash
-cd Dotnet8/Middleware
-func start --port 7256
-```
-
-## Usage
+<a id="usage"></a>
 
 ```bash
 # Valid request — name is uppercased
@@ -113,7 +74,54 @@ Response:
 }
 ```
 
-## Project Structure
+## 🏗️ Architecture
+
+### Middleware Pipeline
+
+Middleware runs in the order it is registered in `Program.cs` (`UseMiddleware<UppercaseNameMiddleware>()` first, then `UseMiddleware<ExceptionHandlerMiddleware>()`):
+
+```text
+HTTP Request
+     │
+     ▼
+UppercaseNameMiddleware      ← reads body, uppercases "name", stores in context.Items
+     │
+     ▼
+ExceptionHandlerMiddleware   ← wraps the function; catches its exceptions, returns 400 ProblemDetails
+     │
+     ▼
+SendMessageFunction          ← reads updated_body; throws InvalidProcessException if name not found
+```
+
+Because `ExceptionHandlerMiddleware` is registered second, it does not catch exceptions raised inside `UppercaseNameMiddleware` (for example, a request body that is not valid JSON). Register it first if you want it to wrap the whole pipeline.
+
+### Components
+
+#### UppercaseNameMiddleware
+
+- Copies the request body into a `MemoryStream` and reads the JSON from that copy
+- Parses JSON and uppercases the `name` property (or sets it to `"name not found"` if absent)
+- Stores the result in `context.Items["updated_body"]`
+- Calls `next.Invoke(context)` to continue the pipeline
+
+#### ExceptionHandlerMiddleware
+
+- Wraps `await next.Invoke(context)` in a try/catch
+- On exception, logs the error with `FunctionUtility.LogCustomException` (title, message, inner exception, stack trace)
+- Calls `FunctionUtility.CreateErrorResponse` to write a `ProblemDetails` JSON response with HTTP 400
+- Handles both `$return` and named output bindings
+
+#### SendMessageFunction
+
+- Reads `context.Items["updated_body"]` for the transformed name
+- Throws `InvalidProcessException("name not found")` if the name was not found in the original body
+- Returns `Hello {name}.` on success
+
+#### InvalidProcessException
+
+Custom exception class with an optional `ProcessName` property, used to signal that the name field was missing or invalid.
+
+### Project Structure
 
 ```text
 Dotnet8/
@@ -130,7 +138,17 @@ Dotnet8/
     └── Middleware.csproj
 ```
 
-## Related Examples
+## 🧪 Development and testing
+
+Build `Middleware/Dotnet8/Middleware/Middleware.csproj`, then check a valid name, a missing field and malformed JSON in a configured local host. Compare the returned status and error object with the middleware order. No host or telemetry service was launched in this review.
+
+## 🛠️ Troubleshooting and limitations
+
+Start Azurite for the development storage setting. The uppercase middleware runs before the exception handler, so its parsing failures are outside that catch block. It rewinds only its copy of the body; it does not replace or rewind the original request body. It logs input and error details, and maps caught exceptions to 400 regardless of cause. Do not pass confidential request data to this demonstration. The curl examples use Bash syntax.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [.NET 6 comparison: with and without middleware](../Dotnet6/readme.md)
 - [Azure Functions middleware overview](../README.md)
@@ -138,6 +156,6 @@ Dotnet8/
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

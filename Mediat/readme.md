@@ -1,8 +1,115 @@
-# MediatR CQRS Example with Azure Functions in C# (.NET 8, Clean Architecture)
+# MediatR CQRS Example with Azure Functions in C# (.NET 8, Layered Architecture)
 
-An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQRS** (Command Query Responsibility Segregation) with a clean multi-layer architecture and **MediatR pipeline behaviours** for logging and performance monitoring. The solution implements user creation and retrieval through CQRS commands and queries, wired with two MediatR pipeline behaviours.
+An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQRS** (Command Query Responsibility Segregation) with a layered architecture and **MediatR pipeline behaviours** for logging and performance monitoring. The solution implements user creation and retrieval through CQRS commands and queries, wired with two MediatR pipeline behaviours.
 
-## Architecture
+## ✨ Features
+
+### Projects
+
+| Project | Description |
+|---|---|
+| `Mediat.AzureFunction` | Azure Functions host — HTTP triggers for create and get user |
+| `Mediat.Business` | `CreateUserCommand` + handler, `GetUserQuery` + handler |
+| `Mediat.Data` | `IUserRepository` interface and in-memory `UserRepository` |
+| `Mediat.Infrastructure` | `LoggingBehavior` and `PerformanceMonitoringBehavior` |
+| `Mediat.Model` | `User` entity (`Id`, `Name`, `Email`) |
+
+## 🚀 Quick start
+
+### Running Locally
+
+```bash
+cd Mediat/Mediat.AzureFunction
+func start --port 7094
+```
+
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
+- A `local.settings.json` file in `Mediat.AzureFunction` (not committed to source control)
+
+#### Minimum `local.settings.json`
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  }
+}
+```
+
+### NuGet Packages (Mediat.AzureFunction)
+
+| Package | Version |
+|---|---|
+| `MediatR.Extensions.Microsoft.DependencyInjection` | 11.0.0 |
+| `Microsoft.Azure.Functions.Worker` | 2.0.0 |
+| `Microsoft.Azure.Functions.Worker.Extensions.Http` | 3.3.0 |
+| `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
+| `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
+| `Newtonsoft.Json` | 13.0.3 |
+
+## 💡 Usage
+
+### HTTP Endpoints
+
+| Function | Method | Route | Description |
+|---|---|---|---|
+| `create-user-function` | POST | `/api/user` | Creates a new user from JSON body |
+| `get-user-function` | GET | `/api/user/{id}` | Retrieves a user by integer ID |
+
+#### Request Body (POST)
+
+```json
+{
+  "name": "Alice",
+  "email": "alice@example.com"
+}
+```
+
+#### Response (POST / GET)
+
+```json
+{
+  "id": 1,
+  "name": "Alice",
+  "email": "alice@example.com"
+}
+```
+
+### Pipeline Behaviours
+
+| Behaviour | Description |
+|---|---|
+| `LoggingBehavior<TRequest, TResponse>` | Logs `Handling {request type}` before and `Handled {response type}` after each handler call |
+| `PerformanceMonitoringBehavior<TRequest, TResponse>` | Logs a warning if handler execution exceeds 500 ms |
+
+### Data Storage
+
+`UserRepository` uses a static in-memory `List<User>`. IDs are assigned sequentially (count + 1). Data is not persisted between application restarts.
+
+<a id="usage"></a>
+
+```bash
+# Create a user
+curl -X POST http://localhost:7094/api/user \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Alice", "email": "alice@example.com"}'
+
+# Retrieve a user
+curl http://localhost:7094/api/user/1
+```
+
+`GET /api/user/{id}` returns `404 Not Found` when no user has that ID, and selected null-request/null-command paths return `400 Bad Request`; malformed JSON and invalid field values are not comprehensively handled.
+
+## 🏗️ Architecture
+
+<a id="architecture"></a>
 
 ```text
 HTTP Request
@@ -26,104 +133,7 @@ Pipeline behaviours (Mediat.Infrastructure) wrap every handler call:
 LoggingBehavior → PerformanceMonitoringBehavior → Handler
 ```
 
-## Projects
-
-| Project | Description |
-|---|---|
-| `Mediat.AzureFunction` | Azure Functions host — HTTP triggers for create and get user |
-| `Mediat.Business` | `CreateUserCommand` + handler, `GetUserQuery` + handler |
-| `Mediat.Data` | `IUserRepository` interface and in-memory `UserRepository` |
-| `Mediat.Infrastructure` | `LoggingBehavior` and `PerformanceMonitoringBehavior` |
-| `Mediat.Model` | `User` entity (`Id`, `Name`, `Email`) |
-
-## HTTP Endpoints
-
-| Function | Method | Route | Description |
-|---|---|---|---|
-| `create-user-function` | POST | `/api/user` | Creates a new user from JSON body |
-| `get-user-function` | GET | `/api/user/{id}` | Retrieves a user by integer ID |
-
-### Request Body (POST)
-
-```json
-{
-  "name": "Alice",
-  "email": "alice@example.com"
-}
-```
-
-### Response (POST / GET)
-
-```json
-{
-  "id": 1,
-  "name": "Alice",
-  "email": "alice@example.com"
-}
-```
-
-## Pipeline Behaviours
-
-| Behaviour | Description |
-|---|---|
-| `LoggingBehavior<TRequest, TResponse>` | Logs `Handling {request type}` before and `Handled {response type}` after each handler call |
-| `PerformanceMonitoringBehavior<TRequest, TResponse>` | Logs a warning if handler execution exceeds 500 ms |
-
-## Data Storage
-
-`UserRepository` uses a static in-memory `List<User>`. IDs are assigned sequentially (count + 1). Data is not persisted between application restarts.
-
-## Requirements
-
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
-- [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
-- A `local.settings.json` file in `Mediat.AzureFunction` (not committed to source control)
-
-### Minimum `local.settings.json`
-
-```json
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
-  }
-}
-```
-
-## NuGet Packages (Mediat.AzureFunction)
-
-| Package | Version |
-|---|---|
-| `MediatR.Extensions.Microsoft.DependencyInjection` | 11.0.0 |
-| `Microsoft.Azure.Functions.Worker` | 2.0.0 |
-| `Microsoft.Azure.Functions.Worker.Extensions.Http` | 3.3.0 |
-| `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
-| `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
-| `Newtonsoft.Json` | 13.0.3 |
-
-## Running Locally
-
-```bash
-cd Mediat/Mediat.AzureFunction
-func start --port 7094
-```
-
-## Usage
-
-```bash
-# Create a user
-curl -X POST http://localhost:7094/api/user \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Alice", "email": "alice@example.com"}'
-
-# Retrieve a user
-curl http://localhost:7094/api/user/1
-```
-
-`GET /api/user/{id}` returns `404 Not Found` when no user has that ID, and both endpoints return `400 Bad Request` for an invalid request.
-
-## Project Structure
+### Project Structure
 
 ```text
 Mediat/
@@ -149,12 +159,22 @@ Mediat/
 └── Mediat.sln
 ```
 
-## Notes
+## 🧪 Development and testing
+
+Check restore/build compatibility for `Mediat/Mediat.sln`, then test create, get, missing ID and restart behavior in a local Functions host. Package references and handlers were inspected; restore, host execution and concurrent requests were not tested here.
+
+## 🛠️ Troubleshooting and limitations
+
+### Notes
 
 - `Mediat.AzureFunction` references `MediatR.Extensions.Microsoft.DependencyInjection` 11.0.0, while `Mediat.Business` and `Mediat.Infrastructure` reference `MediatR` 12.4.1, which includes the `AddMediatR` registration itself. The separate DI extension package is not needed with MediatR 12 and later.
 - Pipeline behaviours run in registration order, so `LoggingBehavior` wraps `PerformanceMonitoringBehavior`, which wraps the handler.
 
-## Related Examples
+The static `List<User>` and count-based ID allocation are unsynchronized and lose data on restart. Neither name nor email is validated. A null deserialization result gets 400, but malformed JSON exceptions are not caught and converted to 400. The host references MediatR DI extensions 11.0.0 while business/infrastructure use MediatR 12.4.1; package compatibility and restore require separate verification. Start Azurite for the development storage setting.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [Keyed dependency injection in Azure Functions](../KeyedService/readme.md)
 - [Azure Functions middleware](../Middleware/README.md)
@@ -163,6 +183,6 @@ Mediat/
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

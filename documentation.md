@@ -7,6 +7,38 @@ permalink: /documentation/
 
 Browse the published guides, examples and reference pages for **C# and .NET Code Examples**. Each guide has a readable web page; the Markdown sources remain available on GitHub.
 
+## 🔎 Choose a sample guide
+
+Use this index to find the relevant framework, dependencies and limitations before running a sample. Start with [the repository quick start](README.md) for a console-only example.
+
+| Guide | What to inspect first |
+|---|---|
+| [Durable Functions overview](Durable/readme.md) | Shared storage/local settings and function chaining |
+| [Durable DemoOne](Durable/DemoOne/readme.md) | HTTP starter, single activity and serialized output |
+| [Durable DemoTwo](Durable/DemoTwo/readme.md) | Three activities and the existing final-response defect |
+| [Middleware overview](Middleware/README.md) | Isolated versus in-process hosting |
+| [.NET 6 middleware](Middleware/Dotnet6/readme.md) | Different worker runtime settings; seekable body assumption |
+| [.NET 8 middleware](Middleware/Dotnet8/readme.md) | Middleware registration order and exception coverage |
+| [Keyed services](KeyedService/readme.md) | Key registration and log-only notification implementations |
+| [MediatR / CQRS](Mediat/readme.md) | Layer boundaries, mixed package generations and volatile storage |
+| [FakeLogger tests](Fake/readme.md) | Two MSTest cases and their exact assertions |
+| [JSONPath queries](JsonSearchPatterns/readme.md) | .NET 6; working directory must contain Data.json |
+| [Public IP lookup](PublicIP/readme.md) | .NET 6; external plain-HTTP request |
+| [Python.NET bridge](PythonBridge/readme.md) | Python DLL/packages and model save/load path mismatch |
+| [SemaphoreSlim](SemaphoreSlim/readme.md) | Simulated work and worker-seeding limitation |
+| [Azure OpenAI SDK / REST](Simple_ChatCompletion/readme.md) | Compile-time credentials/settings and unvalidated model output |
+| [Spectre.Console](SpectreDemo/readme.md) | Interactive terminal and simulated progress |
+| [SQL Server upserts](SQLWrites/readme.md) | .NET 10, disposable database and retry overload differences |
+| [Task.WhenAll failures](TaskErrors/readme.md) | Inspecting all task exceptions |
+| [Unsafe.As](UnsafeAs/readme.md) | Memory layout and little-endian output assumptions |
+| [High-DPI WinForms](FourKWinForm/README.md) | Windows and system DPI awareness |
+
+## 🧭 Reading and verification
+
+Each guide points to its source structure and records execution limits. The project files define package versions and targets; documentation examples do not establish runtime compatibility or benchmark results. No root-level build or test command covers all samples.
+
+The sections below retain the site's generated page/source navigation for published documentation.
+
 ## Read online
 
 <table>

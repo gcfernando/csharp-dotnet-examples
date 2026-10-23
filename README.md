@@ -1,161 +1,108 @@
-<div align="center">
-  <h1>🚀 C# and .NET Examples — Azure Functions, Async and SQL Server</h1>
-  <p><strong>Small, runnable C#/.NET projects that each demonstrate one practical pattern: Azure Functions, dependency injection, async concurrency, SQL Server writes, Windows Forms, terminal UI, and AI integration.</strong></p>
-</div>
+# C# and .NET Examples — Azure Functions, Async and SQL Server
 
-## Overview
+Focused C# samples for learning Azure Functions, asynchronous programming, SQL Server upserts, Windows Forms, terminal interfaces and Python interoperability.
 
-This repository is a hands-on collection of **C# code examples** for **.NET 6, .NET 8, and .NET 10**. Each project is intentionally small and focused on one concept, so you can read the code, run it, and reuse the pattern in your own application.
+## 🔎 Overview
 
-Topics include **Azure Functions isolated worker middleware**, **Durable Functions orchestration**, **keyed dependency injection**, **MediatR / CQRS**, **`SemaphoreSlim` throttling**, **`Task.WhenAll` exception handling**, **SQL Server bulk copy and table-valued parameter upserts**, **`FakeLogger` unit testing**, **JSONPath queries**, **`Unsafe.As`**, **Spectre.Console**, **Python.NET interop**, and **Azure OpenAI chat completion**.
+Choose one sample at a time. This repository contains independent solutions targeting .NET 6, .NET 8 and .NET 10, with different runtime and service requirements. It has no single application or root solution.
 
-Use the project table to choose an example, then follow that folder's README for setup, configuration and known limitations.
+The [documentation index](documentation.md) lists every sample guide and its prerequisites. These are learning examples; read the limitations before adapting a pattern.
 
-## Project Highlights
+## ✨ Features
 
-| Project | Focus | What it demonstrates | Target |
-|---|---|---|---|
-| [Durable](Durable/) | Azure Durable Functions | Stateful, chained orchestration pipelines in the isolated worker model | .NET 8 |
-| [Fake](Fake/) | Logging + unit testing | Testing `ILogger` code with `FakeLogger<T>` from `Microsoft.Extensions.Diagnostics.Testing` and MSTest | .NET 8 |
-| [FourKWinForm](FourKWinForm/) | Windows Forms | High-DPI (`SystemAware`) desktop form | .NET 8 |
-| [JsonSearchPatterns](JsonSearchPatterns/) | JSON processing | Fourteen JSONPath query patterns with Newtonsoft.Json `SelectTokens` | .NET 6 |
-| [KeyedService](KeyedService/) | Dependency injection | Keyed scoped services (`AddKeyedScoped`, `[FromKeyedServices]`) in Azure Functions | .NET 8 |
-| [Mediat](Mediat/) | CQRS + MediatR | Multi-layer Azure Functions solution with commands, queries, and pipeline behaviours | .NET 8 |
-| [Middleware](Middleware/) | Azure Functions | `IFunctionsWorkerMiddleware` request transformation and exception handling | .NET 6 / .NET 8 |
-| [PublicIP](PublicIP/) | Networking | Fetching the public IP address from the ipify API with `HttpClient` | .NET 6 |
-| [PythonBridge](PythonBridge/) | Interop | Calling Python from C# with Python.NET (`pythonnet`) | .NET 8 |
-| [SemaphoreSlim](SemaphoreSlim/) | Concurrency | Limiting concurrent async downloads with `SemaphoreSlim` | .NET 8 |
-| [Simple_ChatCompletion](Simple_ChatCompletion/) | AI integration | Azure OpenAI chat completion via the `Azure.AI.OpenAI` package and via raw REST | .NET 8 |
-| [SpectreDemo](SpectreDemo/) | Terminal UI | Live panels, multi-task progress bars, and prompts with Spectre.Console | .NET 8 |
-| [SQLWrites](SQLWrites/) | SQL Server | Three upsert strategies — per-row transactions, table-valued parameters, and bulk copy — with retry and optimistic concurrency | .NET 10 |
-| [TaskErrors](TaskErrors/) | Async error handling | Capturing **all** exceptions from `Task.WhenAll`, not just the first | .NET 8 |
-| [UnsafeAs](UnsafeAs/) | Low-level .NET | Zero-copy reinterpretation with `Unsafe.As<TFrom, TTo>` and unsafe pointers | .NET 8 |
+| Area | Examples | Target |
+|---|---|---|
+| Azure Functions | [Middleware](Middleware/README.md), [Durable orchestration](Durable/readme.md), [keyed services](KeyedService/readme.md), [MediatR / CQRS](Mediat/readme.md) | .NET 6 or 8, Functions v4 |
+| Async and memory | [Task.WhenAll failures](TaskErrors/readme.md), [SemaphoreSlim queue](SemaphoreSlim/readme.md), [Unsafe.As](UnsafeAs/readme.md) | .NET 8 |
+| Data | [SQL Server upserts](SQLWrites/readme.md), [JSONPath queries](JsonSearchPatterns/readme.md) | .NET 10 / .NET 6 |
+| Integration | [Python.NET bridge](PythonBridge/readme.md), [Azure OpenAI chat completion](Simple_ChatCompletion/readme.md), [public IP lookup](PublicIP/readme.md) | .NET 8 / .NET 6 |
+| Interfaces and tests | [Windows Forms DPI](FourKWinForm/README.md), [Spectre.Console](SpectreDemo/readme.md), [FakeLogger tests](Fake/readme.md) | .NET 8 |
 
-Every project folder has its own readme with detailed explanations, configuration, and sample requests.
+## 🚀 Quick start
 
----
-
-## 🧭 Repository Map
-
-### ☁️ Azure Functions & Cloud Patterns
-- [`Durable`](Durable/) — Durable Functions orchestration and function chaining (isolated worker, Functions v4)
-- [`KeyedService`](KeyedService/) — keyed dependency injection with Azure Functions
-- [`Mediat`](Mediat/) — CQRS and MediatR flow in Azure Functions
-- [`Middleware`](Middleware/) — Azure Functions middleware examples for .NET 6 and .NET 8
-
-### 🧠 Core .NET Concepts
-- [`SemaphoreSlim`](SemaphoreSlim/) — throttling concurrent async work
-- [`TaskErrors`](TaskErrors/) — understanding exceptions in async workflows
-- [`UnsafeAs`](UnsafeAs/) — unsafe conversions and pointer-based operations
-- [`JsonSearchPatterns`](JsonSearchPatterns/) — practical JSONPath traversal and filtering
-
-### 🗄️ Data & Integration
-- [`SQLWrites`](SQLWrites/) — SQL Server upsert strategies compared (normal, TVP, bulk)
-- [`PythonBridge`](PythonBridge/) — bridging C# with Python
-- [`Simple_ChatCompletion`](Simple_ChatCompletion/) — Azure OpenAI chat completion examples
-
-### 🖥️ UI & UX
-- [`FourKWinForm`](FourKWinForm/) — Windows Forms app with DPI awareness
-- [`SpectreDemo`](SpectreDemo/) — polished terminal demos using Spectre.Console
-
-### 🧪 Testing & Utilities
-- [`Fake`](Fake/) — unit testing log output with `FakeLogger<T>`
-- [`PublicIP`](PublicIP/) — quick public IP lookup sample
-
----
-
-## ⚙️ Tech Stack
-
-- C# / .NET 6, .NET 8, .NET 10
-- Azure Functions v4 (isolated worker) and Durable Functions
-- SQL Server (`Microsoft.Data.SqlClient`)
-- MediatR
-- Python.NET (`pythonnet`)
-- Azure OpenAI (`Azure.AI.OpenAI`)
-- Spectre.Console
-- Newtonsoft.Json
-- MSTest and `Microsoft.Extensions.Diagnostics.Testing`
-- Windows Forms
-
----
-
-## 🚀 Quick Start
-
-Each project is self-contained. Install the [.NET SDK](https://dotnet.microsoft.com/download) version that the project targets (see the table above), pick one folder, and run it from there:
+Run a small console example that needs no external service, from a terminal with the .NET 8 SDK and runtime installed:
 
 ```bash
 git clone https://github.com/gcfernando/csharp_codes.git
 cd csharp_codes
+dotnet run --project TaskErrors/TaskErrors.csproj
+```
 
-# Example: run a single console project
-cd SpectreDemo
+The two failing tasks are caught and their messages are printed:
+
+```text
+Custom Error Method One
+Custom Error Method Two
+```
+
+This is expected output inferred from [Program.cs](TaskErrors/Program.cs), not a live execution result from this documentation review.
+
+## 📦 Prerequisites and installation
+
+Install an SDK capable of building the selected target and the corresponding runtime for execution. A newer SDK alone does not guarantee an older runtime is installed. Restore uses the package references in each `.csproj`; there is no repository-wide dependency installation step.
+
+| Sample type | Additional requirements |
+|---|---|
+| Functions | Azure Functions Core Tools v4; local settings; Azurite when using `UseDevelopmentStorage=true` |
+| SQLWrites | .NET 10 and a disposable SQL Server database; the sample writes records and changes schema |
+| PythonBridge | Compatible Python 3.12 DLL and architecture; Python packages listed in its guide |
+| Simple_ChatCompletion | Azure OpenAI endpoint, deployment and credentials; execution makes paid service requests |
+| FourKWinForm | Windows and the .NET 8 Windows Desktop runtime |
+
+## ⚙️ Configuration
+
+Functions projects expect an untracked `local.settings.json` in the function project folder. The correct `FUNCTIONS_WORKER_RUNTIME` differs between the .NET 6 in-process baseline and isolated projects; follow the [middleware guide](Middleware/README.md).
+
+SQL connection strings, Python DLL selection and Azure OpenAI constants currently live in sample source files. These applications do not all read environment variables or .NET user secrets automatically. Read the sample guide before changing configuration and keep real credentials out of commits.
+
+## 💡 Usage
+
+From the repository root, choose an explicit project or solution:
+
+```bash
+dotnet test Fake/Fake.sln
+dotnet run --project SpectreDemo/SpectreDemo.csproj
+```
+
+SpectreDemo needs an interactive terminal. JSONPath reads `Data.json` relative to the working directory, so run it from its folder:
+
+```bash
+cd JsonSearchPatterns
 dotnet run
 ```
 
-Every project includes a Visual Studio solution (`.sln`) file. Folders that contain several projects (for example `SQLWrites`, `Mediat`, and `Fake`) need you to choose which project to run — open the solution in Visual Studio, or pass the project path from the repository root, for example:
+Start Functions with `func start` from the function project folder after its local settings and storage emulator are ready. See each guide for routes and ports.
 
-```bash
-dotnet run --project SQLWrites/UseNormal
-```
+## 🏗️ Architecture
 
-The Azure Functions samples (`Durable`, `KeyedService`, `Mediat`, `Middleware`) require [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) and are started from the function project folder with:
+Folders isolate the examples. `Fake`, `SQLWrites` and `Mediat` contain multiple projects and solution files; `Durable` and `Middleware` group several independently hosted apps. Most other folders contain one console or desktop application. The `.csproj` files are the source of truth for target frameworks and packages.
 
-```bash
-func start
-```
+The `_config.yml`, `_layouts` and `assets` folders support the documentation site, independently of the C# applications.
 
-Some samples need external resources — for example a SQL Server database (`SQLWrites`), an Azure OpenAI endpoint and key (`Simple_ChatCompletion`), or a local Python installation (`PythonBridge`). The project readme lists what is required.
+## 🧪 Development and testing
 
----
+Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared test suite or CI workflow in this checkout.
 
-## ❓ FAQ
+Documentation verification checked source, project references and local links. It did not launch GUIs, Functions hosts, SQL scripts, Python embedding or Azure OpenAI requests.
 
-**What is this repository for?**
-It is a reference of focused C#/.NET examples. Each folder answers one practical question, such as “how do I add middleware to an Azure Functions isolated worker app?” or “how do I catch every exception from `Task.WhenAll`?”.
+## 🛠️ Troubleshooting and limitations
 
-**Which .NET version do I need?**
-It depends on the project: most target .NET 8, `JsonSearchPatterns`, `PublicIP`, and the `Middleware/Dotnet6` samples target .NET 6, and `SQLWrites` targets .NET 10. `FourKWinForm` requires Windows.
+- **Wrong SDK or runtime:** inspect the selected `.csproj` and `dotnet --list-sdks` / `dotnet --list-runtimes`.
+- **Functions startup:** confirm the worker model, local settings and storage availability before testing HTTP routes.
+- **Known sample defects:** [DemoTwo](Durable/DemoTwo/readme.md#known-issue) returns 400 after a completed orchestration, and [SemaphoreSlim](SemaphoreSlim/readme.md) seeds fewer workers than its configured limit. The guides explain these existing behaviors.
+- **Integration examples:** PythonBridge has a model-file path mismatch; Mediat has mixed MediatR package generations and an unsynchronized in-memory store. Review their guides before use.
+- **Performance:** SQLWrites contains example batch sizes, not published benchmark results.
 
-**Are these production-ready libraries?**
-They are learning-oriented demos with project-specific requirements and limitations. For reusable packages, see [Nilog](https://github.com/gcfernando/nilog) (`ILogger` extensions that reduce call-site allocations) and [Glass.Message](https://github.com/gcfernando/glass) (a modern WinForms `MessageBox` replacement), and review each package's compatibility and limitations.
+## 🤝 Contributing
 
-**Where can I find similar examples in Python?**
-See the companion [Python projects collection](https://github.com/gcfernando/python_codes) — its `LoadLibraries` project shows the reverse direction of `PythonBridge`: calling a .NET library from Python.
+Keep changes focused on one sample, state its target framework and prerequisites, and include relevant build/test evidence. Update the sample guide when changing configuration, output or known limitations. Use placeholder data and credentials.
 
----
+## 🔒 Security
 
-## 💡 Notes
+Do not include secrets or personal data in issues, logs or examples. For sensitive reports, use a private reporting option if the repository provides one; otherwise contact the maintainer privately before sharing details. This checkout defines no dedicated security policy.
 
-- Most projects are learning-oriented and intentionally compact.
-- This repo focuses on experiments, demos, and practical patterns rather than production-ready apps.
-- Several projects can be opened directly in Visual Studio or run via `dotnet run`.
+## 📄 Support and license
 
----
+Use [repository issues](https://github.com/gcfernando/csharp_codes/issues) for reproducible questions and defects. No repository license file is present in this checkout; confirm permission before reusing or redistributing code. Package dependencies retain their own licenses.
 
-## 🌟 Summary
-
-This is a compact, colorful collection of .NET experiments covering cloud-native patterns, async techniques, AI integration, UI work, database writes, and system-level programming. It is a great sandbox for learning by building small, focused examples.
-
-If you want to explore the repo in a more hands-on way, start with:
-
-1. [`Mediat`](Mediat/) for architecture patterns
-2. [`Middleware`](Middleware/) for Azure Functions internals
-3. [`SQLWrites`](SQLWrites/) for database performance patterns
-4. [`SpectreDemo`](SpectreDemo/) for terminal UX magic
-5. [`PythonBridge`](PythonBridge/) for cross-language integration
-
-## 🔗 Related Projects
-
-- [Python projects](https://github.com/gcfernando/python_codes) — standalone Python scripts and apps
-- [VB.NET Windows Forms examples](https://github.com/gcfernando/vb_codes) — Visual Basic desktop experiments
-- [Developer knowledge base](https://github.com/gcfernando/document) — includes a complete C#/.NET OOP guide and an Azure cheat sheet
-
-<div align="center">
-  <p><strong>Happy coding! 💻✨</strong></p>
-</div>
-
----
-
-## Documentation links
-
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Documentation index](documentation.md) · [Python examples](https://github.com/gcfernando/python_codes) · [VB.NET binary clock](https://github.com/gcfernando/vb_codes)

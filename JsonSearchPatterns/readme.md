@@ -2,11 +2,38 @@
 
 A .NET 6 console application demonstrating 14 **JSONPath query patterns in C#** using **Newtonsoft.Json**'s `JObject.SelectTokens` method — wildcards, array indexes, recursive descent, filter expressions with `&&` and `||`, and regular-expression matches. The project serves as a practical reference for navigating complex, nested JSON structures.
 
-## Overview
+## 🔎 Overview
+
+<a id="overview"></a>
 
 JSONPath (via `JObject.SelectTokens`) selects values directly from JSON objects and arrays, including nested properties and filter expressions. This project runs fourteen queries against a sample person record (`Data.json`) and prints the results to the console.
 
-## Query Patterns Demonstrated
+## 🚀 Quick start
+
+### Build and Run
+
+```bash
+cd JsonSearchPatterns
+dotnet run
+```
+
+The application prints the results of each query to the console, separated by blank lines.
+
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/download) plus a compatible .NET 6 runtime
+
+### NuGet Packages
+
+| Package | Version |
+|---|---|
+| `Newtonsoft.Json` | 13.0.3 |
+
+## 💡 Usage
+
+### Query Patterns Demonstrated
 
 | Pattern | Description |
 |---|---|
@@ -25,7 +52,7 @@ JSONPath (via `JObject.SelectTokens`) selects values directly from JSON objects 
 | `$.parents[?(@.name =~ /^J/)]` | Array filter using a regular expression |
 | `$.parents[?(@.occupation == 'Teacher' \|\| @.age >= 40)]` | Array filter with OR condition |
 
-## Sample Data (`Data.json`)
+### Sample Data (`Data.json`)
 
 The JSON file describes a person with:
 
@@ -36,26 +63,9 @@ The JSON file describes a person with:
 - `miscellaneous` — array of hobby entries
 - `messageHeader` — id and created date
 
-## Requirements
+## 🏗️ Architecture
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/download) (or later)
-
-## NuGet Packages
-
-| Package | Version |
-|---|---|
-| `Newtonsoft.Json` | 13.0.3 |
-
-## Build and Run
-
-```bash
-cd JsonSearchPatterns
-dotnet run
-```
-
-The application prints the results of each query to the console, separated by blank lines.
-
-## Project Structure
+### Project Structure
 
 ```text
 JsonSearchPatterns/
@@ -66,7 +76,13 @@ JsonSearchPatterns/
 └── JsonSearchPatterns.sln
 ```
 
-## FAQ
+## 🧪 Development and testing
+
+Run the sample from its folder and compare all fourteen queries with Data.json, including the AND/OR and regex filters. Confirm that changing the working directory without the data file produces the documented limitation. The review checked the query strings and file-copy setting; it did not execute the console sample.
+
+## 🛠️ Troubleshooting and limitations
+
+### FAQ
 
 **What is the difference between `SelectToken` and `SelectTokens`?**
 `SelectToken` returns a single matching token (or `null`), while `SelectTokens` returns every match as an `IEnumerable<JToken>`. This project uses `SelectTokens` so that wildcard, recursive, and filter queries can return several results.
@@ -74,13 +90,17 @@ JsonSearchPatterns/
 **Can I run the same queries with System.Text.Json?**
 These examples rely on Newtonsoft.Json's built-in JSONPath support through `SelectTokens`; System.Text.Json does not offer this method.
 
-## Related Examples
+`FileHandler` reads `Data.json` relative to the current working directory on every query. Run from this sample folder as shown, or from an output folder containing the copied file; running with --project from an unrelated folder can fail to find it. The application waits for console input after printing results.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [Python.NET interop — exchanging data between C# and Python](../PythonBridge/readme.md)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

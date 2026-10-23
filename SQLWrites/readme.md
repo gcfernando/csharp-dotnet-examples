@@ -1,8 +1,60 @@
 # SQL Server Upsert in C# — Row-by-Row vs Table-Valued Parameters vs SqlBulkCopy (.NET 10)
 
-A .NET 10 solution comparing three **SQL Server upsert strategies in C#** with `Microsoft.Data.SqlClient` for a `CustomerActivityEvent` record: row-by-row transactions, **table-valued parameters (TVP)** with a stored procedure, and **`SqlBulkCopy`** into a staging table followed by a reconcile procedure. All strategies support an optional optimistic-concurrency check (`rowversion`), ignore out-of-order (older) events, and are wrapped in a shared transient-fault retry policy with exponential backoff.
+A .NET 10 solution comparing three **SQL Server upsert strategies in C#** with `Microsoft.Data.SqlClient` for a `CustomerActivityEvent` record: row-by-row transactions, **table-valued parameters (TVP)** with a stored procedure, and **`SqlBulkCopy`** into a staging table followed by a reconcile procedure. All strategies support an optional optimistic-concurrency check (`rowversion`), ignore out-of-order (older) events, and are wrapped in a shared transient-fault retry policy with overload-specific retry behavior.
 
-## The Data Model
+## 🚀 Quick start
+
+### Build and Run
+
+After reviewing the configuration below and preparing a disposable database, run from the repository root (each command is independent):
+
+```bash
+# Normal strategy demo (upserts a single event)
+dotnet run --project SQLWrites/UseNormal
+
+# TVP strategy demo (sends a batch of 2 000 events)
+dotnet run --project SQLWrites/UseTvp
+
+# Bulk Staging strategy demo (streams 200 000 events)
+dotnet run --project SQLWrites/UseBulk
+```
+
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- SQL Server (local or remote)
+
+### NuGet Packages
+
+| Package | Version |
+|---|---|
+| `Microsoft.Data.SqlClient` | 6.1.3 |
+
+## ⚙️ Configuration
+
+### Database Setup
+
+Run `Query.sql` against your SQL Server database to create:
+
+- `dbo.CustomerActivityEvents` — main table with `row_version` column and unique index on `event_id`
+- `dbo.CustomerActivityEventType` — TVP type definition
+- `dbo.UpsertCustomerActivityEventsType` — stored procedure for the TVP strategy
+- `dbo.CustomerActivityEvents_Staging` — staging table for the bulk strategy
+- `dbo.ReconcileCustomerActivityEventsBatch` — stored procedure for bulk reconciliation
+
+<a id="configuration"></a>
+
+Edit the connection string in each project's `Program.cs`:
+
+```csharp
+var connectionString = "Data Source=<server>;Initial Catalog=<db>;Integrated Security=True;Trust Server Certificate=True";
+```
+
+## 💡 Usage
+
+### The Data Model
 
 `CustomerActivityEvent` is a sealed record with:
 
@@ -18,9 +70,9 @@ A .NET 10 solution comparing three **SQL Server upsert strategies in C#** with `
 
 Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than the stored value, providing built-in out-of-order protection.
 
-## Upsert Strategies
+### Upsert Strategies
 
-### 1. Normal — `UseNormal`
+#### 1. Normal — `UseNormal`
 
 **Best for:** low volume, simple correctness requirements.
 
@@ -30,7 +82,7 @@ Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than
 - Commits; rolls back on failure
 - Supports `UpsertAsync` (single event) and `UpsertManyAsync` (loop over a list)
 
-### 2. TVP — `UseTvp`
+#### 2. TVP — `UseTvp`
 
 **Best for:** medium-volume batch ingestion via stored procedures.
 
@@ -38,74 +90,30 @@ Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than
 - Passes it as a Table-Valued Parameter to `dbo.UpsertCustomerActivityEventsType`
 - The stored procedure deduplicates, updates stale rows, and inserts new ones in a single transaction
 
-### 3. Bulk Staging — `UseBulk`
+#### 3. Bulk Staging — `UseBulk`
 
-**Best for:** high-volume ingestion pipelines (tested with 200 000 events).
+**Demonstrates:** staging-based ingestion; the demo generates 200,000 events, without a published benchmark.
 
 - Generates a `batchId` (GUID)
 - Streams events into `dbo.CustomerActivityEvents_Staging` via `SqlBulkCopy` (batch size: 50 000, table lock, streaming enabled)
 - Calls `dbo.ReconcileCustomerActivityEventsBatch` which deduplicates, updates, and inserts — returning `RowsUpdated`, `RowsInserted`, `RowsConflicted` as OUTPUT parameters
 - Cleans up the staging table after reconciliation
 
-## Strategy Comparison
+### Strategy Comparison
 
 | Strategy | Best For | Notes |
 |---|---|---|
-| Normal | Low volume / simplicity | Easiest to debug; 1 round trip per event |
+| Normal | Per-event transactions | Executes update and insert commands per event |
 | TVP | Medium-volume batches | Clean SQL boundary via stored proc |
-| Bulk Staging | High-volume pipelines | Fastest; needs staging table and reconcile proc |
+| Bulk Staging | Staging-based batches | Requires a staging table and reconcile procedure; measure performance for your workload |
 
-## Retry Policy (`Common/SqlRetryPolicy`)
+### Retry Policy (`Common/SqlRetryPolicy`)
 
-Wraps all DB operations with exponential backoff and jitter. Retries on these transient SQL error codes: 1205 (deadlock), -2 (timeout), 4060, 40197, 40501, 40613, 49918, 49919, 49920, 10053, 10054, 10060, `TimeoutException`, and `IOException`.
+The non-generic `ExecuteAsync` overload catches selected `SqlException` failures and permits five retries after the initial attempt, using exponential backoff (100 ms base, capped at 5,000 ms) with jitter. The generic `ExecuteAsync<T>` overload permits five total attempts by default and uses linear 200 ms increments; its filter also recognizes `TimeoutException` and an inner `IOException`. These overloads do not share one identical policy. See [SqlRetryPolicy.cs](Common/SqlRetryPolicy.cs) for the full filters.
 
-Default: **5 retries**, base delay **100 ms**, max delay **5 000 ms**.
+## 🏗️ Architecture
 
-## Database Setup
-
-Run `Query.sql` against your SQL Server database to create:
-
-- `dbo.CustomerActivityEvents` — main table with `row_version` column and unique index on `event_id`
-- `dbo.CustomerActivityEventType` — TVP type definition
-- `dbo.UpsertCustomerActivityEventsType` — stored procedure for the TVP strategy
-- `dbo.CustomerActivityEvents_Staging` — staging table for the bulk strategy
-- `dbo.ReconcileCustomerActivityEventsBatch` — stored procedure for bulk reconciliation
-
-## Requirements
-
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- SQL Server (local or remote)
-
-## Configuration
-
-Edit the connection string in each project's `Program.cs`:
-
-```csharp
-var connectionString = "Data Source=<server>;Initial Catalog=<db>;Integrated Security=True;Trust Server Certificate=True";
-```
-
-## NuGet Packages
-
-| Package | Version |
-|---|---|
-| `Microsoft.Data.SqlClient` | 6.1.3 |
-
-## Build and Run
-
-From the repository root (each command is independent):
-
-```bash
-# Normal strategy demo (upserts a single event)
-dotnet run --project SQLWrites/UseNormal
-
-# TVP strategy demo (sends a batch of 2 000 events)
-dotnet run --project SQLWrites/UseTvp
-
-# Bulk Staging strategy demo (streams 200 000 events)
-dotnet run --project SQLWrites/UseBulk
-```
-
-## Project Structure
+### Project Structure
 
 ```text
 SQLWrites/
@@ -126,7 +134,13 @@ SQLWrites/
 └── SQLWrites.sln
 ```
 
-## FAQ
+## 🧪 Development and testing
+
+A non-executing build is `dotnet build SQLWrites/SQLWrites.sln` from the repository root. Validate schema and behavior only against a disposable database. This documentation review did not run SQL scripts or database writers.
+
+## 🛠️ Troubleshooting and limitations
+
+### FAQ
 
 **Which is the fastest way to insert or update many rows in SQL Server from C#?**
 For large volumes, `SqlBulkCopy` into a staging table followed by a set-based reconcile (the `UseBulk` strategy) avoids per-row round trips. TVPs are a good middle ground for batches sent to a stored procedure, and row-by-row upserts are simplest for low volumes. This project does not publish benchmark numbers — measure with your own data and server.
@@ -135,9 +149,13 @@ For large volumes, `SqlBulkCopy` into a staging table followed by a set-based re
 Without those hints, two concurrent sessions can both see that a row is missing and both try to insert it. The hints keep the existence check and the insert consistent under concurrency.
 
 **What happens on a deadlock or timeout?**
-`SqlRetryPolicy` retries transient errors (including deadlock 1205 and timeout -2) with exponential backoff and jitter, up to 5 retries by default.
+Both overloads recognize selected transient SQL errors, including deadlock 1205 and timeout -2. The non-generic overload uses exponential backoff with jitter; the generic overload uses linear delays and a different attempt count. See the retry-policy section above.
 
-## Related Examples
+Use a disposable database. Query.sql creates/alters schema and drops/recreates an existing index, procedure and table type. The normal demo generates one event, TVP 2,000, and bulk 200,000; these are input sizes, not measured performance. Connection strings are hard-coded in each Program.cs and are not read from environment variables. Re-running the demos generates fresh event IDs and adds rows.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [Contact Book — Python GUI using SQL Server stored procedures](https://github.com/gcfernando/python_codes/blob/main/GUI_Apps/README.md)
 - [Local SQL Server and other databases with Podman Compose](https://github.com/gcfernando/other_codes#-local-services-stack)
@@ -145,6 +163,6 @@ Without those hints, two concurrent sessions can both see that a row is missing 
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

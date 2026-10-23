@@ -2,7 +2,9 @@
 
 A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one using **isolated worker middleware** (`WithMiddleware`, built on `IFunctionsWorkerMiddleware`) and one without middleware (`WithoutMiddleware`, an in-process function). Both expose a `SendMessage` HTTP POST endpoint that greets the caller by name, but the middleware version transforms the name to uppercase before the function handler runs.
 
-## Projects
+## ✨ Features
+
+### Projects
 
 | Project | Port | Description |
 |---|---|---|
@@ -11,26 +13,31 @@ A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one usin
 
 Middleware is a feature of the isolated worker model, which is why the baseline project uses the in-process model.
 
-## How the Middleware Works
+## 🚀 Quick start
 
-`UppercaseNameMiddleware` implements `IFunctionsWorkerMiddleware`:
+### Running Locally
 
-1. Reads the HTTP request body as a string
-2. Parses it as JSON (`JObject`)
-3. Converts the `name` property value to uppercase (or sets it to `"name not found"` if absent)
-4. Stores the updated `JObject` in `context.Items["updated_body"]`
-5. Resets the request body stream position
-6. Calls `next(context)` to pass control to the function handler
+From the repository root, use a separate terminal for each command group:
 
-The `SendMessageFunction` then reads `context.Items["updated_body"]` and returns `Hello {name}.`
+```bash
+# With middleware
+cd Middleware/Dotnet6/WithMiddleware
+func start --port 7052
 
-## Requirements
+# Without middleware (separate terminal)
+cd Middleware/Dotnet6/WithoutMiddleware
+func start --port 7162
+```
+
+## 📦 Prerequisites and installation
+
+### Requirements
 
 - [.NET 6 SDK](https://dotnet.microsoft.com/download)
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - A `local.settings.json` in each project (not committed to source control)
 
-### Minimum `local.settings.json` (WithMiddleware)
+#### Minimum `local.settings.json` (WithMiddleware)
 
 ```json
 {
@@ -44,7 +51,7 @@ The `SendMessageFunction` then reads `context.Items["updated_body"]` and returns
 
 For the in-process `WithoutMiddleware` project, set `"FUNCTIONS_WORKER_RUNTIME": "dotnet"` instead of `"dotnet-isolated"`.
 
-## NuGet Packages (WithMiddleware)
+### NuGet Packages (WithMiddleware)
 
 | Package | Version |
 |---|---|
@@ -55,21 +62,22 @@ For the in-process `WithoutMiddleware` project, set `"FUNCTIONS_WORKER_RUNTIME":
 
 `WithoutMiddleware` references only `Microsoft.NET.Sdk.Functions` 4.2.0.
 
-## Running Locally
+## 💡 Usage
 
-From the `Middleware` folder:
+### How the Middleware Works
 
-```bash
-# With middleware
-cd Dotnet6/WithMiddleware
-func start --port 7052
+`UppercaseNameMiddleware` implements `IFunctionsWorkerMiddleware`:
 
-# Without middleware (separate terminal)
-cd Dotnet6/WithoutMiddleware
-func start --port 7162
-```
+1. Reads the HTTP request body as a string
+2. Parses it as JSON (`JObject`)
+3. Converts the `name` property value to uppercase (or sets it to `"name not found"` if absent)
+4. Stores the updated `JObject` in `context.Items["updated_body"]`
+5. Resets the request body stream position
+6. Calls `next(context)` to pass control to the function handler
 
-## Usage
+The `SendMessageFunction` then reads `context.Items["updated_body"]` and returns `Hello {name}.`
+
+<a id="usage"></a>
 
 ```bash
 # With middleware — name is returned in uppercase
@@ -98,7 +106,9 @@ curl -X POST http://localhost:7162/api/SendMessage \
 
 Response: `Hello, alice. This HTTP triggered function executed successfully.` (with no `name`, it asks you to pass one).
 
-## Project Structure
+## 🏗️ Architecture
+
+### Project Structure
 
 ```text
 Dotnet6/
@@ -116,7 +126,17 @@ Dotnet6/
 └── readme.md
 ```
 
-## Related Examples
+## 🧪 Development and testing
+
+Build the two projects independently and compare the same valid-name request on ports 7052 and 7162. Also check missing names, malformed JSON and whether the selected host provides a seekable request stream. These checks were not executed against a running host in this review.
+
+## 🛠️ Troubleshooting and limitations
+
+Start Azurite for the development storage setting. The isolated middleware sets `requestData.Body.Position = 0`; a non-seekable body stream can fail at that line. It parses and logs the entire request body without an exception handler or sensitive-field redaction. The examples use Bash curl syntax; on PowerShell, use curl.exe with appropriate JSON quoting or Invoke-RestMethod.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [.NET 8 version with exception-handling middleware](../Dotnet8/readme.md)
 - [Azure Functions middleware overview](../README.md)
@@ -124,6 +144,6 @@ Dotnet6/
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

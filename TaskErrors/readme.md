@@ -2,11 +2,28 @@
 
 A .NET 8 console application demonstrating how to **catch every exception from `Task.WhenAll` in C#**, not just the first one, when several concurrent tasks fail.
 
-## The Problem
+## 🚀 Quick start
 
-When `Task.WhenAll` is awaited and multiple tasks throw, only the **first** exception is rethrown into the catch block. The remaining exceptions are silently discarded if you only inspect the caught `Exception`.
+### Build and Run
 
-## The Solution
+```bash
+cd TaskErrors
+dotnet run
+```
+
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+
+## 💡 Usage
+
+### The Problem
+
+When `Task.WhenAll` is awaited and multiple tasks throw, one exception is rethrown into the catch block. Other failures remain on the task objects and are missed if you inspect only the caught `Exception`.
+
+### The Solution
 
 After catching, iterate over each task in your list and collect their `Exception.InnerExceptions`:
 
@@ -23,7 +40,7 @@ catch (Exception ex)
 }
 ```
 
-## Demo
+### Demo
 
 The application runs two async methods concurrently:
 
@@ -32,27 +49,18 @@ The application runs two async methods concurrently:
 | `MethodOneAsync` | 1 second | `"Custom Error Method One"` |
 | `MethodTwoAsync` | 2 seconds | `"Custom Error Method Two"` |
 
-Both tasks are stored in a `List<Task>` before `Task.WhenAll` is awaited. After the catch block, the code collects inner exceptions from all tasks and prints both error messages.
+Both tasks are stored in a `List<Task>` before `Task.WhenAll` is awaited. Inside the catch block, the code collects inner exceptions from all tasks and prints both error messages.
 
-## Requirements
-
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
-
-## Build and Run
-
-```bash
-cd TaskErrors
-dotnet run
-```
-
-## Expected Output
+### Expected Output
 
 ```text
 Custom Error Method One
 Custom Error Method Two
 ```
 
-## Project Structure
+## 🏗️ Architecture
+
+### Project Structure
 
 ```text
 TaskErrors/
@@ -61,17 +69,27 @@ TaskErrors/
 └── TaskErrors.sln
 ```
 
-The expected output above was confirmed by running the project.
+The expected output follows from the two exception messages in `Program.cs`; execution was not repeated in this review.
 
-## FAQ
+## 🧪 Development and testing
+
+From the repository root, `dotnet run --project TaskErrors/TaskErrors.csproj` should print the two messages shown above. Both task definitions and the catch block were inspected; this documentation review did not re-run the application.
+
+## 🛠️ Troubleshooting and limitations
+
+### FAQ
 
 **Why does `await Task.WhenAll(...)` only throw one exception?**
-`Task.WhenAll` returns a task whose `Exception` is an `AggregateException` containing every failure, but `await` unwraps it and rethrows only the first inner exception. Keeping a reference to the tasks (or to the `WhenAll` task) lets you read all of them afterwards.
+`Task.WhenAll` returns a task whose `Exception` is an `AggregateException` containing every failure, but `await` unwraps it and rethrows one of the inner exceptions. Keeping a reference to the tasks (or to the `WhenAll` task) lets you read all of them afterwards.
 
 **Is there a shorter alternative?**
 You can store the `WhenAll` task in a variable, await it inside `try`, and in the `catch` read `whenAllTask.Exception.InnerExceptions` — it contains the same exceptions as collecting them from each task.
 
-## Related Examples
+Awaiting WhenAll throws one of the failures; other failures remain stored on the task objects. They are not discarded. This example enumerates each faulted task after awaiting completion; cancellation and nested aggregate handling are not demonstrated.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [Unit testing ILogger with FakeLogger](../Fake/readme.md)
 - [SemaphoreSlim concurrency example](../SemaphoreSlim/readme.md)
@@ -79,6 +97,6 @@ You can store the `WhenAll` task in a variable, await it inside `try`, and in th
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

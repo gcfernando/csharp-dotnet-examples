@@ -2,29 +2,37 @@
 
 A minimal .NET 6 console application that shows **how to get your public IP address in C#**: it calls the [ipify](https://www.ipify.org/) API with `HttpClient` and prints the result.
 
-## How It Works
+## 🚀 Quick start
 
-The application sends an HTTP GET request to `http://api.ipify.org`, which returns your public IPv4 address as plain text. The result is printed to the console. If the request fails, the error message is printed instead.
-
-## Requirements
-
-- [.NET 6 SDK](https://dotnet.microsoft.com/download) (or later)
-- An active internet connection
-
-## Build and Run
+### Build and Run
 
 ```bash
 cd PublicIP
 dotnet run
 ```
 
-## Example Output
+## 📦 Prerequisites and installation
+
+### Requirements
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/download) plus a compatible .NET 6 runtime
+- An active internet connection
+
+## 💡 Usage
+
+### How It Works
+
+The application sends an HTTP GET request to `http://api.ipify.org`, which returns your public IPv4 address as plain text. The result is printed to the console. If the request fails, the error message is printed instead.
+
+### Example Output
 
 ```text
 Your public IP Address: 203.0.113.42
 ```
 
-## Project Structure
+## 🏗️ Architecture
+
+### Project Structure
 
 ```text
 PublicIP/
@@ -33,18 +41,28 @@ PublicIP/
 └── PublicIP.sln
 ```
 
-## Notes
+## 🧪 Development and testing
+
+If you choose to run the network example, verify either an address message or a handled error, then supply console input to exit. This documentation review inspected the URL and error handler without contacting the external service.
+
+## 🛠️ Troubleshooting and limitations
+
+### Notes
 
 - The request uses plain `http://api.ipify.org`. ipify also offers `https://api.ipify.org`, and `https://api64.ipify.org` for IPv6 where available.
 - The code creates one `HttpClient` for a single request, which is fine for a console demo. In long-running applications, reuse `HttpClient` or use `IHttpClientFactory`.
 
-## Related Examples
+The source uses plain HTTP and depends on an external service. Network or proxy failures are caught and printed; there is no retry policy or caller-provided cancellation token. After the request, Console.Read waits for input. The example IP address is illustrative, not a captured network result.
+
+## 🔗 Related documentation
+
+### Related Examples
 
 - [Python internet speed test](https://github.com/gcfernando/python_codes/blob/main/Internet%20Speed%20Test/readme.md)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---
 
-## Documentation links
+### Documentation links
 
 [Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

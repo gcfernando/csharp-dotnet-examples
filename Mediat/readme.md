@@ -1,3 +1,5 @@
+<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-clean-architecture"></a>
+
 # MediatR CQRS Example with Azure Functions in C# (.NET 8, Layered Architecture)
 
 An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQRS** (Command Query Responsibility Segregation) with a layered architecture and **MediatR pipeline behaviours** for logging and performance monitoring. The solution implements user creation and retrieval through CQRS commands and queries, wired with two MediatR pipeline behaviours.

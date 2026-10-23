@@ -1,3 +1,6 @@
+<a id="-summary"></a>
+<a id="overview"></a>
+
 # C# and .NET Examples — Azure Functions, Async and SQL Server
 
 Focused C# samples for learning Azure Functions, asynchronous programming, SQL Server upserts, Windows Forms, terminal interfaces and Python interoperability.
@@ -7,6 +10,12 @@ Focused C# samples for learning Azure Functions, asynchronous programming, SQL S
 Choose one sample at a time. This repository contains independent solutions targeting .NET 6, .NET 8 and .NET 10, with different runtime and service requirements. It has no single application or root solution.
 
 The [documentation index](documentation.md) lists every sample guide and its prerequisites. These are learning examples; read the limitations before adapting a pattern.
+
+<a id="-core-net-concepts"></a>
+<a id="project-highlights"></a>
+<a id="️-azure-functions--cloud-patterns"></a>
+<a id="️-data--integration"></a>
+<a id="️-ui--ux"></a>
 
 ## ✨ Features
 
@@ -36,6 +45,8 @@ Custom Error Method Two
 ```
 
 This is expected output inferred from [Program.cs](TaskErrors/Program.cs), not a live execution result from this documentation review.
+
+<a id="️-tech-stack"></a>
 
 ## 📦 Prerequisites and installation
 
@@ -73,17 +84,24 @@ dotnet run
 
 Start Functions with `func start` from the function project folder after its local settings and storage emulator are ready. See each guide for routes and ports.
 
+<a id="-repository-map"></a>
+
 ## 🏗️ Architecture
 
 Folders isolate the examples. `Fake`, `SQLWrites` and `Mediat` contain multiple projects and solution files; `Durable` and `Middleware` group several independently hosted apps. Most other folders contain one console or desktop application. The `.csproj` files are the source of truth for target frameworks and packages.
 
 The `_config.yml`, `_layouts` and `assets` folders support the documentation site, independently of the C# applications.
 
+<a id="-testing--utilities"></a>
+
 ## 🧪 Development and testing
 
 Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared test suite or CI workflow in this checkout.
 
 Documentation verification checked source, project references and local links. It did not launch GUIs, Functions hosts, SQL scripts, Python embedding or Azure OpenAI requests.
+
+<a id="-faq"></a>
+<a id="-notes"></a>
 
 ## 🛠️ Troubleshooting and limitations
 
@@ -100,6 +118,9 @@ Keep changes focused on one sample, state its target framework and prerequisites
 ## 🔒 Security
 
 Do not include secrets or personal data in issues, logs or examples. For sensitive reports, use a private reporting option if the repository provides one; otherwise contact the maintainer privately before sharing details. This checkout defines no dedicated security policy.
+
+<a id="-related-projects"></a>
+<a id="documentation-links"></a>
 
 ## 📄 Support and license
 

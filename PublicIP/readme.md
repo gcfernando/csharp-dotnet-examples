@@ -58,11 +58,11 @@ The source uses plain HTTP and depends on an external service. Network or proxy 
 
 ### Related Examples
 
-- [Python internet speed test](https://github.com/gcfernando/python_codes/blob/main/Internet%20Speed%20Test/readme.md)
+- [Python internet speed test](https://github.com/gcfernando/python-projects-and-examples/blob/main/Internet%20Speed%20Test/readme.md)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---
 
 ### Documentation links
 
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp-dotnet-examples/documentation/) · [Project overview](../README.md) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

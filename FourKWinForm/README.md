@@ -84,11 +84,11 @@ On Windows, build the project and check Message/Exit behavior, empty inputs and 
 
 ### Related
 
-- [Glass.Message](https://github.com/gcfernando/glass) — a DPI-aware, themed `MessageBox` replacement for Windows Forms that could replace the standard greeting dialog
+- [Glass.Message](https://github.com/gcfernando/glass-winforms-messagebox) — a DPI-aware, themed `MessageBox` replacement for Windows Forms that could replace the standard greeting dialog
 - [Back to the C# and .NET code examples](../README.md)
 
 ---
 
 ### Documentation links
 
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp-dotnet-examples/documentation/) · [Project overview](../README.md) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

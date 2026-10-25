@@ -3,6 +3,8 @@
 
 # C# and .NET Examples — Azure Functions, Async and SQL Server
 
+**Read online:** [Documentation website](https://gcfernando.github.io/csharp-dotnet-examples/) · [All guides](documentation.md)
+
 Focused C# samples for learning Azure Functions, asynchronous programming, SQL Server upserts, Windows Forms, terminal interfaces and Python interoperability.
 
 ## 🔎 Overview
@@ -32,8 +34,8 @@ The [documentation index](documentation.md) lists every sample guide and its pre
 Run a small console example that needs no external service, from a terminal with the .NET 8 SDK and runtime installed:
 
 ```bash
-git clone https://github.com/gcfernando/csharp_codes.git
-cd csharp_codes
+git clone https://github.com/gcfernando/csharp-dotnet-examples.git
+cd csharp-dotnet-examples
 dotnet run --project TaskErrors/TaskErrors.csproj
 ```
 
@@ -44,7 +46,7 @@ Custom Error Method One
 Custom Error Method Two
 ```
 
-This is expected output inferred from [Program.cs](TaskErrors/Program.cs), not a live execution result from this documentation review.
+This is expected output inferred from [Program.cs](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/TaskErrors/Program.cs), not a live execution result from this documentation review.
 
 <a id="️-tech-stack"></a>
 
@@ -96,7 +98,7 @@ The `_config.yml`, `_layouts` and `assets` folders support the documentation sit
 
 ## 🧪 Development and testing
 
-Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared test suite or CI workflow in this checkout.
+Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared test suite or CI workflow in this checkout.
 
 Documentation verification checked source, project references and local links. It did not launch GUIs, Functions hosts, SQL scripts, Python embedding or Azure OpenAI requests.
 
@@ -124,6 +126,6 @@ Do not include secrets or personal data in issues, logs or examples. For sensiti
 
 ## 📄 Support and license
 
-Use [repository issues](https://github.com/gcfernando/csharp_codes/issues) for reproducible questions and defects. No repository license file is present in this checkout; confirm permission before reusing or redistributing code. Package dependencies retain their own licenses.
+Use [repository issues](https://github.com/gcfernando/csharp-dotnet-examples/issues) for reproducible questions and defects. No repository license file is present in this checkout; confirm permission before reusing or redistributing code. Package dependencies retain their own licenses.
 
-[Documentation index](documentation.md) · [Python examples](https://github.com/gcfernando/python_codes) · [VB.NET binary clock](https://github.com/gcfernando/vb_codes)
+[Documentation index](documentation.md) · [Python examples](https://github.com/gcfernando/python-projects-and-examples) · [VB.NET binary clock](https://github.com/gcfernando/vb-dotnet-examples)

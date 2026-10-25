@@ -10,9 +10,9 @@ There are two versions: a **.NET 6** comparison of the same function written wit
 
 | Folder | Target | Hosting model | Description |
 |---|---|---|---|
-| [Dotnet6/WithoutMiddleware](https://github.com/gcfernando/csharp_codes/tree/main/Middleware/Dotnet6/WithoutMiddleware) | .NET 6, Functions v4 | In-process (`Microsoft.NET.Sdk.Functions`) | Baseline: the function reads the `name` from the request itself, with no middleware |
-| [Dotnet6/WithMiddleware](https://github.com/gcfernando/csharp_codes/tree/main/Middleware/Dotnet6/WithMiddleware) | .NET 6, Functions v4 | Isolated worker | `UppercaseNameMiddleware` parses and uppercases the `name` before the function runs |
-| [Dotnet8/Middleware](https://github.com/gcfernando/csharp_codes/tree/main/Middleware/Dotnet8/Middleware) | .NET 8, Functions v4 | Isolated worker (ASP.NET Core integration) | `UppercaseNameMiddleware` plus `ExceptionHandlerMiddleware` and a custom error-response utility |
+| [Dotnet6/WithoutMiddleware](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Middleware/Dotnet6/WithoutMiddleware) | .NET 6, Functions v4 | In-process (`Microsoft.NET.Sdk.Functions`) | Baseline: the function reads the `name` from the request itself, with no middleware |
+| [Dotnet6/WithMiddleware](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Middleware/Dotnet6/WithMiddleware) | .NET 6, Functions v4 | Isolated worker | `UppercaseNameMiddleware` parses and uppercases the `name` before the function runs |
+| [Dotnet8/Middleware](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Middleware/Dotnet8/Middleware) | .NET 8, Functions v4 | Isolated worker (ASP.NET Core integration) | `UppercaseNameMiddleware` plus `ExceptionHandlerMiddleware` and a custom error-response utility |
 
 The custom worker middleware API used here belongs to the isolated worker model. The .NET 6 examples also differ in hosting model; an isolated app can run without registering custom middleware.
 
@@ -49,7 +49,7 @@ See each sub-folder's readme ([.NET 6](./Dotnet6/readme.md), [.NET 8](./Dotnet8/
 
 In the isolated worker model, middleware is a class that implements `IFunctionsWorkerMiddleware` and is registered in `Program.cs`. It runs for every function invocation and can execute code before and after the function handler. Middleware can read and modify the `FunctionContext`, read the HTTP request body, add values to `context.Items`, and catch exceptions thrown further down the pipeline.
 
-The .NET 8 project registers its middleware like this ([`Program.cs`](./Dotnet8/Middleware/Program.cs)):
+The .NET 8 project registers its middleware like this ([`Program.cs`](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/Middleware/Dotnet8/Middleware/Program.cs)):
 
 ```csharp
 var host = new HostBuilder()
@@ -87,13 +87,13 @@ Create an untracked `local.settings.json` in the chosen function project: set `A
 
 ### Related Examples
 
-- [Keyed dependency injection in Azure Functions](../KeyedService/)
-- [MediatR and CQRS in Azure Functions](../Mediat/)
-- [Durable Functions orchestration](../Durable/)
+- [Keyed dependency injection in Azure Functions](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/KeyedService)
+- [MediatR and CQRS in Azure Functions](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Mediat)
+- [Durable Functions orchestration](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Durable)
 - [Back to the C# and .NET code examples](../README.md)
 
 ---
 
 ### Documentation links
 
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp-dotnet-examples/documentation/) · [Project overview](../README.md) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

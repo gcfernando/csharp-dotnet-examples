@@ -65,4 +65,4 @@ The sections below retain the site's generated page/source navigation for publis
 
 ## Explore more
 
-[All developer projects](https://gcfernando.github.io/gcfernando/projects/) · [Repository on GitHub](https://github.com/gcfernando/csharp_codes) · [XML sitemap](https://gcfernando.github.io/csharp_codes/sitemap.xml)
+[All developer projects](https://gcfernando.github.io/gcfernando/projects/) · [Repository on GitHub](https://github.com/gcfernando/csharp-dotnet-examples) · [XML sitemap](https://gcfernando.github.io/csharp-dotnet-examples/sitemap.xml)

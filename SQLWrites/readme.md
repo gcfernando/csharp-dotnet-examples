@@ -109,7 +109,7 @@ Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than
 
 ### Retry Policy (`Common/SqlRetryPolicy`)
 
-The non-generic `ExecuteAsync` overload catches selected `SqlException` failures and permits five retries after the initial attempt, using exponential backoff (100 ms base, capped at 5,000 ms) with jitter. The generic `ExecuteAsync<T>` overload permits five total attempts by default and uses linear 200 ms increments; its filter also recognizes `TimeoutException` and an inner `IOException`. These overloads do not share one identical policy. See [SqlRetryPolicy.cs](Common/SqlRetryPolicy.cs) for the full filters.
+The non-generic `ExecuteAsync` overload catches selected `SqlException` failures and permits five retries after the initial attempt, using exponential backoff (100 ms base, capped at 5,000 ms) with jitter. The generic `ExecuteAsync<T>` overload permits five total attempts by default and uses linear 200 ms increments; its filter also recognizes `TimeoutException` and an inner `IOException`. These overloads do not share one identical policy. See [SqlRetryPolicy.cs](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/SQLWrites/Common/SqlRetryPolicy.cs) for the full filters.
 
 ## 🏗️ Architecture
 
@@ -167,12 +167,12 @@ The reconciliation query reads staging rows with `READPAST` and then deletes row
 
 ### Related Examples
 
-- [Contact Book — Python GUI using SQL Server stored procedures](https://github.com/gcfernando/python_codes/blob/main/GUI_Apps/README.md)
-- [Local SQL Server and other databases with Podman Compose](https://github.com/gcfernando/other_codes#-local-services-stack)
+- [Contact Book — Python GUI using SQL Server stored procedures](https://github.com/gcfernando/python-projects-and-examples/blob/main/GUI_Apps/README.md)
+- [Local SQL Server and other databases with Podman Compose](https://github.com/gcfernando/developer-tools-and-guides#-local-services-stack)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---
 
 ### Documentation links
 
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp-dotnet-examples/documentation/) · [Project overview](../README.md) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

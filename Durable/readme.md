@@ -8,8 +8,8 @@ Two runnable **Azure Durable Functions** v4 demos that demonstrate stateful, cha
 
 | Project | Port | Pipeline |
 |---|---|---|
-| [DemoOne](./DemoOne) | 7239 | HTTP → Orchestrator → 1 activity (greeting) |
-| [DemoTwo](./DemoTwo) | 7176 | HTTP → Orchestrator → 3 activities (validate → process → greet) |
+| [DemoOne](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Durable/DemoOne) | 7239 | HTTP → Orchestrator → 1 activity (greeting) |
+| [DemoTwo](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Durable/DemoTwo) | 7176 | HTTP → Orchestrator → 3 activities (validate → process → greet) |
 
 ## 🚀 Quick start
 
@@ -94,4 +94,4 @@ Both starters wait for completion without an explicit timeout or cancellation to
 
 ### Documentation links
 
-[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp_codes/documentation/) · [Project overview](https://gcfernando.github.io/csharp_codes/) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)
+[Read all C# and .NET Code Examples guides online](https://gcfernando.github.io/csharp-dotnet-examples/documentation/) · [Project overview](../README.md) · [All developer projects](https://gcfernando.github.io/gcfernando/projects/)

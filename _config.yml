@@ -1,6 +1,6 @@
 # GitHub Pages documentation site; does not configure application deployment.
 url: "https://gcfernando.github.io"
-baseurl: "/csharp_codes"
+baseurl: "/csharp-dotnet-examples"
 title: "C# and .NET Code Examples"
 description: "C# and .NET examples for Azure Functions, async programming, dependency injection, SQL Server, testing and desktop applications."
 lang: "en"
@@ -119,7 +119,7 @@ defaults:
       description: "Explore System.Runtime.CompilerServices.Unsafe.As in C# to reinterpret memory without copying, including examples and type-safety limitations."
 
 # Public documentation navigation and presentation.
-repository: gcfernando/csharp_codes
+repository: gcfernando/csharp-dotnet-examples
 theme: jekyll-theme-primer
 projects_hub: https://gcfernando.github.io/gcfernando/projects/
 project_category: "Learn & reference"

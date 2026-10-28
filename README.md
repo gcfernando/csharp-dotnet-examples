@@ -98,7 +98,7 @@ The `_config.yml`, `_layouts` and `assets` folders support the documentation sit
 
 ## 🧪 Development and testing
 
-Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared test suite or CI workflow in this checkout.
+Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared application test suite or application CI build in this checkout; the Repository standards workflow checks metadata separately.
 
 Documentation verification checked source, project references and local links. It did not launch GUIs, Functions hosts, SQL scripts, Python embedding or Azure OpenAI requests.
 
@@ -119,7 +119,7 @@ Keep changes focused on one sample, state its target framework and prerequisites
 
 ## 🔒 Security
 
-Do not include secrets or personal data in issues, logs or examples. For sensitive reports, use a private reporting option if the repository provides one; otherwise contact the maintainer privately before sharing details. This checkout defines no dedicated security policy.
+Do not include secrets or personal data in issues, logs or examples. For sensitive reports, use a private reporting option if the repository provides one; otherwise contact the maintainer privately before sharing details. See the [security policy](SECURITY.md) for private reporting.
 
 <a id="-related-projects"></a>
 <a id="documentation-links"></a>
@@ -129,3 +129,7 @@ Do not include secrets or personal data in issues, logs or examples. For sensiti
 Use [repository issues](https://github.com/gcfernando/csharp-dotnet-examples/issues) for reproducible questions and defects. No repository license file is present in this checkout; confirm permission before reusing or redistributing code. Package dependencies retain their own licenses.
 
 [Documentation index](documentation.md) · [Python examples](https://github.com/gcfernando/python-projects-and-examples) · [VB.NET binary clock](https://github.com/gcfernando/vb-dotnet-examples)
+
+## Repository maintenance
+
+[Contributing](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/CONTRIBUTING.md) · [Security policy](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/SECURITY.md) · [Repository standards](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/REPOSITORY_STANDARDS.md)

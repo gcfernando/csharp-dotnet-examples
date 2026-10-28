@@ -5,6 +5,8 @@ description: "Practical C# examples for Azure Functions, async programming, SQL 
 permalink: /documentation/
 ---
 
+# Documentation
+
 Browse the published guides, examples and reference pages for **C# and .NET Code Examples**. Each guide has a readable web page; the Markdown sources remain available on GitHub.
 
 ## 🔎 Choose a sample guide

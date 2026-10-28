@@ -1,6 +1,14 @@
-# SemaphoreSlim Example in C# — Throttle Concurrent Async Downloads (.NET 8)
+[C# and .NET examples](../README.md) · **Async programming**
+
+<a id="semaphoreslim-example-in-c--throttle-concurrent-async-downloads-net-8"></a>
+
+# Limit Async Concurrency with SemaphoreSlim in C#
 
 A .NET 8 console application demonstrating how to **limit concurrency with `SemaphoreSlim` in C#** — throttling the number of asynchronous operations that run at the same time, a common need when calling APIs, downloading files, or querying databases in parallel. The `FileDownloader` class uses a queue and a semaphore around simulated work; its current startup loop seeds fewer workers than the configured limit.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -16,6 +24,8 @@ dotnet run
 ### Requirements
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -41,6 +51,8 @@ await downloader.StartDownloadAsync();
 
 Console output shows which files are downloading and when each completes, followed by `All files have been downloaded.`
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -55,6 +67,8 @@ SemaphoreSlim/
 ## 🧪 Development and testing
 
 When running locally, check that each of the fifteen simulated file names appears in start/completion messages and that the final message prints. Observe the documented two-worker startup behavior separately from the configured limit of three. This review used source inspection rather than timed execution.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

@@ -1,6 +1,12 @@
-# Azure OpenAI Chat Completion in C# — Azure.AI.OpenAI SDK vs REST API (.NET 8)
+[C# and .NET examples](../README.md) · **AI integration**
+
+<a id="azure-openai-chat-completion-in-c--azureaiopenai-sdk-vs-rest-api-net-8"></a>
+
+# Azure OpenAI Chat Completion in C#: SDK and REST
 
 A .NET 8 console application that demonstrates two ways to call an **Azure OpenAI chat completion** endpoint from C#: via the **`Azure.AI.OpenAI` NuGet package** and via a **raw HTTP REST call**. Both approaches use the same system prompt, which instructs the model to extract a product code and attributes from a natural-language query and return structured JSON.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
 
 ## 🔎 Overview
 
@@ -18,6 +24,8 @@ The system message instructs the model to extract product codes (e.g. `6205`) an
 ```
 
 For queries unrelated to products, the system prompt requests a polite refusal; the code does not enforce that behavior.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -58,6 +66,8 @@ All connection settings are defined in `Configuration.cs`:
 
 > **Security note:** Do not commit a real API key. The source currently reads `Configuration.Key`; implement a private runtime configuration source before using real credentials. Environment variables, user secrets, Key Vault and Entra authentication are not wired into this sample. Rotate any real key that has been exposed.
 
+<a id="guide-usage"></a>
+
 ## 💡 Usage
 
 ### Connection Methods
@@ -88,6 +98,8 @@ I am sorry, I cannot help with your request. Your question is not related to pro
 I am sorry, I cannot help with your request. Your question is not related to products.
 ```
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -109,6 +121,8 @@ Simple_ChatCompletion/
 ## 🧪 Development and testing
 
 Build the project after reviewing credential handling. A separate integration check would need an authorized Azure OpenAI deployment and should inspect SDK and REST failures as well as successful responses. No service requests or credentials were used in this documentation review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

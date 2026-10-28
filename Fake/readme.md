@@ -1,12 +1,20 @@
-# Unit Testing ILogger with FakeLogger in C# — .NET 8 MSTest Example
+[C# and .NET examples](../README.md) · **Testing and logging**
+
+<a id="unit-testing-ilogger-with-fakelogger-in-c--net-8-mstest-example"></a>
+
+# Test ILogger with FakeLogger and MSTest in C#
 
 A .NET 8 solution demonstrating how to **unit test logging in C#** with `FakeLogger<T>` from the `Microsoft.Extensions.Diagnostics.Testing` package. It shows how to assert on log messages and log levels written through `ILogger<T>` — without a mocking library, custom test doubles, or capturing console output.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
 
 ## 🔎 Overview
 
 <a id="overview"></a>
 
 The project shows how to verify logging behaviour in tests without mocking or capturing log output manually. `FakeLogger<T>` records all log calls and exposes them through `LatestRecord`, making it straightforward to assert on log messages and log levels.
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -16,6 +24,8 @@ The project shows how to verify logging behaviour in tests without mocking or ca
 |---|---|
 | `Fake.Data` | Contains the `Calculate` class with a `Divide` method that logs results and errors |
 | `Fake.Test` | MSTest project with two tests validating the logging behaviour of `Calculate` |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -52,6 +62,8 @@ dotnet test
 | `MSTest.TestAdapter` | 3.3.1 |
 | `MSTest.TestFramework` | 3.3.1 |
 | `coverlet.collector` | 6.0.2 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -95,6 +107,8 @@ Fake/
 | `CanLogError` | After `Divide(10, 0)`, the latest log record has `LogLevel.Error` |
 
 Run `dotnet test Fake/Fake.sln` from the repository root to execute the two committed MSTest checks. This documentation review inspected those tests; it did not execute them.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

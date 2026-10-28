@@ -1,8 +1,16 @@
-# Azure Functions Middleware Examples — .NET 6 and .NET 8 Isolated Worker (C#)
+[C# and .NET examples](../README.md) · **Azure Functions**
+
+<a id="azure-functions-middleware-examples--net-6-and-net-8-isolated-worker-c"></a>
+
+# Azure Functions Middleware Examples in C#
 
 Runnable C# examples of **Azure Functions middleware** with `IFunctionsWorkerMiddleware`. They show how to intercept an HTTP-triggered function in the **.NET isolated worker model**, transform the JSON request body before the function runs, share data through `FunctionContext.Items`, and turn unhandled exceptions into a structured `ProblemDetails` error response.
 
 There are two versions: a **.NET 6** comparison of the same function written with and without middleware, and a **.NET 8** project that combines request-transforming middleware with exception-handling middleware.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -15,6 +23,8 @@ There are two versions: a **.NET 6** comparison of the same function written wit
 | [Dotnet8/Middleware](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Middleware/Dotnet8/Middleware) | .NET 8, Functions v4 | Isolated worker (ASP.NET Core integration) | `UppercaseNameMiddleware` plus `ExceptionHandlerMiddleware` and a custom error-response utility |
 
 The custom worker middleware API used here belongs to the isolated worker model. The .NET 6 examples also differ in hosting model; an isolated app can run without registering custom middleware.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -42,6 +52,8 @@ See each sub-folder's readme ([.NET 6](./Dotnet6/readme.md), [.NET 8](./Dotnet8/
 
 - [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) and/or [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local) v4
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -78,6 +90,8 @@ Because `ExceptionHandlerMiddleware` is registered after `UppercaseNameMiddlewar
 ## 🧪 Development and testing
 
 Build and host only one project at a time. Compare the .NET 6 baseline with the isolated version using the same name; for .NET 8, test both a missing name and malformed JSON to observe the exception-handler boundary. No Functions host was launched in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

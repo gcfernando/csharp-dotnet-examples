@@ -1,6 +1,14 @@
-# Task.WhenAll Exception Handling in C# — Capturing All Exceptions (.NET 8)
+[C# and .NET examples](../README.md) · **Async programming**
+
+<a id="taskwhenall-exception-handling-in-c--capturing-all-exceptions-net-8"></a>
+
+# Handle Every Task.WhenAll Exception in C#
 
 A .NET 8 console application demonstrating how to **catch every exception from `Task.WhenAll` in C#**, not just the first one, when several concurrent tasks fail.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -16,6 +24,8 @@ dotnet run
 ### Requirements
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -58,6 +68,8 @@ Custom Error Method One
 Custom Error Method Two
 ```
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -74,6 +86,8 @@ The expected output follows from the two exception messages in `Program.cs`; exe
 ## 🧪 Development and testing
 
 From the repository root, `dotnet run --project TaskErrors/TaskErrors.csproj` should print the two messages shown above. Both task definitions and the catch block were inspected; this documentation review did not re-run the application.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

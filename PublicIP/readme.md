@@ -1,6 +1,14 @@
-# Get Your Public IP Address in C# — HttpClient and the ipify API (.NET 6)
+[C# and .NET examples](../README.md) · **HTTP and integration**
+
+<a id="get-your-public-ip-address-in-c--httpclient-and-the-ipify-api-net-6"></a>
+
+# Get Your Public IP Address in C# with HttpClient
 
 A minimal .NET 6 console application that shows **how to get your public IP address in C#**: it calls the [ipify](https://www.ipify.org/) API with `HttpClient` and prints the result.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -18,6 +26,8 @@ dotnet run
 - [.NET 6 SDK](https://dotnet.microsoft.com/download) plus a compatible .NET 6 runtime
 - An active internet connection
 
+<a id="guide-usage"></a>
+
 ## 💡 Usage
 
 ### How It Works
@@ -29,6 +39,8 @@ The application sends an HTTP GET request to `http://api.ipify.org`, which retur
 ```text
 Your public IP Address: 203.0.113.42
 ```
+
+<a id="guide-architecture"></a>
 
 ## 🏗️ Architecture
 
@@ -44,6 +56,8 @@ PublicIP/
 ## 🧪 Development and testing
 
 If you choose to run the network example, verify either an address message or a handled error, then supply console input to exit. This documentation review inspected the URL and error handler without contacting the external service.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

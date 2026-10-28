@@ -1,12 +1,20 @@
-# Keyed Services in .NET 8 Dependency Injection — Azure Functions Example (C#)
+[C# and .NET examples](../README.md) · **Dependency injection**
+
+<a id="keyed-services-in-net-8-dependency-injection--azure-functions-example-c"></a>
+
+# Keyed Dependency Injection in .NET 8 Azure Functions
 
 An Azure Functions v4 demo on .NET 8 that demonstrates **keyed dependency injection** (`AddKeyedScoped` / `[FromKeyedServices]`) in the isolated worker model. Three HTTP endpoints each receive a different implementation of the same `INotification` interface, selected by its registered key — a way to choose between email, SMS, and push strategies without writing a factory class.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
 
 ## 🔎 Overview
 
 <a id="overview"></a>
 
 .NET 8 introduced first-class keyed service registration in the DI container. This project shows how to register multiple implementations of the same interface under different string keys and inject the correct one into each Azure Function using the `[FromKeyedServices("key")]` attribute.
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -19,6 +27,8 @@ An Azure Functions v4 demo on .NET 8 that demonstrates **keyed dependency inject
 | `smsnotificationfunction` | GET | `"sms"` | `SmsNotification` |
 
 Each function calls `INotification.NotifyAsync(message)` on its injected implementation and returns a plain-text response confirming which channel was used.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -60,6 +70,8 @@ func start --port 7194
 | `Microsoft.Azure.Functions.Worker.Sdk` | 1.16.4 |
 | `Microsoft.ApplicationInsights.WorkerService` | 2.21.0 |
 | `Microsoft.Azure.Functions.Worker.ApplicationInsights` | 1.1.0 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -123,6 +135,8 @@ KeyedService/
 ## 🧪 Development and testing
 
 Build with `dotnet build KeyedService/KeyedService.csproj` from the repository root. In a configured local host, invoke each of the three GET routes and compare its confirmation with the logged channel. No host or telemetry service was launched in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

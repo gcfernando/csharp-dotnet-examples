@@ -1,6 +1,14 @@
-# SQL Server Upsert in C# — Row-by-Row vs Table-Valued Parameters vs SqlBulkCopy (.NET 10)
+[C# and .NET examples](../README.md) · **SQL Server and data**
+
+<a id="sql-server-upsert-in-c--row-by-row-vs-table-valued-parameters-vs-sqlbulkcopy-net-10"></a>
+
+# SQL Server Upserts in C#: TVP and SqlBulkCopy
 
 A .NET 10 solution comparing three **SQL Server upsert strategies in C#** with `Microsoft.Data.SqlClient` for a `CustomerActivityEvent` record: row-by-row transactions, **table-valued parameters (TVP)** with a stored procedure, and **`SqlBulkCopy`** into a staging table followed by a reconcile procedure. All strategies support an optional optimistic-concurrency check (`rowversion`), ignore out-of-order (older) events, and are wrapped in a shared transient-fault retry policy with overload-specific retry behavior.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -51,6 +59,8 @@ Edit the connection string in each project's `Program.cs`:
 ```csharp
 var connectionString = "Data Source=<server>;Initial Catalog=<db>;Integrated Security=True;Trust Server Certificate=True";
 ```
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -111,6 +121,8 @@ Upsert logic applies updates only when the incoming `TimeStampUtc` is newer than
 
 The non-generic `ExecuteAsync` overload catches selected `SqlException` failures and permits five retries after the initial attempt, using exponential backoff (100 ms base, capped at 5,000 ms) with jitter. The generic `ExecuteAsync<T>` overload permits five total attempts by default and uses linear 200 ms increments; its filter also recognizes `TimeoutException` and an inner `IOException`. These overloads do not share one identical policy. See [SqlRetryPolicy.cs](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/SQLWrites/Common/SqlRetryPolicy.cs) for the full filters.
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -137,6 +149,8 @@ SQLWrites/
 ## 🧪 Development and testing
 
 A build that does not run the writers is `dotnet build SQLWrites/SQLWrites.sln` from the repository root. Validate schema and behavior only against a disposable database. Include duplicate IDs, equal/older timestamps, mismatched row versions, partial bulk-copy failure and retries after an uncertain commit. This documentation review did not run SQL scripts or database writers.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

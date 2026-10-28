@@ -1,6 +1,14 @@
-# Azure Durable Functions Function Chaining Example in C# — DemoTwo (.NET 8)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-function-chaining-example-in-c--demotwo-net-8"></a>
+
+# Azure Durable Functions: Function Chaining in C#
 
 An **Azure Durable Functions** v4 example of the **function chaining** pattern in C#. An HTTP trigger starts an orchestrator that calls three activity functions in sequence — input validation with a regular expression, processing, and greeting generation — passing each activity's output to the next one.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -13,6 +21,8 @@ An **Azure Durable Functions** v4 example of the **function chaining** pattern i
 | `func-validate-input` | Activity | Accepts only letters and spaces (`^[A-Za-z\s]+$`); returns empty string if invalid |
 | `func-process-input` | Activity | Passes the value through; returns empty string if input is blank |
 | `func-say-hello` | Activity | Returns `"Hello {name}!"` or empty string if name is blank |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -54,6 +64,8 @@ func start --port 7176
 | `Microsoft.Azure.Functions.Worker.Extensions.Http` | 3.3.0 |
 | `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
 | `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -124,6 +136,8 @@ DemoTwo/
 ## 🧪 Development and testing
 
 From the repository root, build with `dotnet build Durable/DemoTwo/DemoTwo.csproj`. In a configured local host, compare valid and invalid names, inspect all three activity calls and confirm the existing final-response defect. This review did not execute the host or the illustrative fix.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

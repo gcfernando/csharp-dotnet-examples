@@ -1,6 +1,14 @@
-# Azure Durable Functions Hello World in C# — DemoOne (.NET 8 Isolated Worker)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-hello-world-in-c--demoone-net-8-isolated-worker"></a>
+
+# Azure Durable Functions: Hello World in C#
 
 A minimal **Azure Durable Functions** v4 example in C# that runs a single-activity orchestration pipeline on the .NET 8 isolated worker. It is a good first step for learning how an HTTP starter (`DurableTaskClient`), an orchestrator (`TaskOrchestrationContext`), and an activity function work together. An HTTP trigger receives a JSON body, starts an orchestrator, and the orchestrator calls one activity that returns a personalised greeting.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -11,6 +19,8 @@ A minimal **Azure Durable Functions** v4 example in C# that runs a single-activi
 | `func-message-validator` | HTTP POST | Reads request body, starts orchestration, waits for completion, returns result |
 | `func-message-orchestrator` | Orchestration | Extracts `name` from JSON payload, calls `func-say-hello` |
 | `func-say-hello` | Activity | Returns `"Hello {name}!"` |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -52,6 +62,8 @@ func start --port 7239
 | `Microsoft.Azure.Functions.Worker.Extensions.Http` | 3.3.0 |
 | `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
 | `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -111,6 +123,8 @@ DemoOne/
 ## 🧪 Development and testing
 
 From the repository root, build with `dotnet build Durable/DemoOne/DemoOne.csproj -p:Platform=x64`. The project declares only the `x64` platform; its solution's Any CPU configurations map to x64 but omit the corresponding `Build.0` entries, so select x64 or build the project explicitly when verifying it. In a configured local host, verify the greeting value, exact HTTP encoding and empty-body 400 response. Source and paths were checked; host execution was not performed.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

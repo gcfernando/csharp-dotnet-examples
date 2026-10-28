@@ -1,6 +1,14 @@
-# Spectre.Console Example in C# — Live Panels, Progress Bars and Prompts (.NET 8)
+[C# and .NET examples](../README.md) · **Terminal interfaces**
+
+<a id="spectreconsole-example-in-c--live-panels-progress-bars-and-prompts-net-8"></a>
+
+# Spectre.Console: Rich Terminal Interfaces in C#
 
 A .NET 8 console application demonstrating how to build a **rich terminal UI in C#** with the [Spectre.Console](https://spectreconsole.net/) library. The app simulates an interactive data collection workflow with live panels, multi-task progress bars, and a selection prompt — all with coloured text and animated UI elements.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -10,6 +18,8 @@ A .NET 8 console application demonstrating how to build a **rich terminal UI in 
 - **Multi-task progress bar** — three simulated task displays (Fetching User Data, Downloading Reports, Analyzing Logs) with percentage, spinner, and remaining-time columns
 - **Selection prompt** — asks whether to restart the workflow or exit
 - **Continuous loop** — the entire workflow repeats until the user selects "No"
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -32,6 +42,8 @@ dotnet run
 |---|---|
 | `Spectre.Console` | 0.49.1 |
 | `Spectre.Console.Cli` | 0.49.1 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -66,6 +78,8 @@ SpectreDemo/
 ## 🧪 Development and testing
 
 In an interactive terminal, check the four panel stages, completion of all three progress bars and both restart choices. The source and package references were checked; terminal interaction was not executed in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

@@ -1,6 +1,14 @@
-# Azure Durable Functions Examples in C# — Function Chaining with the .NET 8 Isolated Worker
+[C# and .NET examples](../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-examples-in-c--function-chaining-with-the-net-8-isolated-worker"></a>
+
+# Azure Durable Functions Examples in C#
 
 Two runnable **Azure Durable Functions** v4 demos that demonstrate stateful, chained orchestration pipelines using the **isolated worker model on .NET 8**. Each demo starts an orchestration from an HTTP trigger, calls one or more activity functions in sequence (the *function chaining* pattern), and waits for the result before responding.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -10,6 +18,8 @@ Two runnable **Azure Durable Functions** v4 demos that demonstrate stateful, cha
 |---|---|---|
 | [DemoOne](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Durable/DemoOne) | 7239 | HTTP → Orchestrator → 1 activity (greeting) |
 | [DemoTwo](https://github.com/gcfernando/csharp-dotnet-examples/tree/main/Durable/DemoTwo) | 7176 | HTTP → Orchestrator → 3 activities (validate → process → greet) |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -67,6 +77,8 @@ Each project requires its own `local.settings.json` (not committed to source con
 }
 ```
 
+<a id="guide-usage"></a>
+
 ## 💡 Usage
 
 ### What Are Durable Functions?
@@ -76,6 +88,8 @@ Azure Durable Functions is an extension of Azure Functions that lets you write s
 ## 🧪 Development and testing
 
 Build DemoOne and DemoTwo separately, then start each host with its own local settings and storage. Check a normal name, an empty body and malformed JSON; inspect orchestration status as well as the HTTP response. No Functions host or storage emulator was launched in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

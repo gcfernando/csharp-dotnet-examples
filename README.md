@@ -1,7 +1,19 @@
 <a id="-summary"></a>
 <a id="overview"></a>
 
-# C# and .NET Examples — Azure Functions, Async and SQL Server
+<a id="c-and-net-examples--azure-functions-async-and-sql-server"></a>
+
+<div align="center" markdown="1">
+
+# C# and .NET Examples — Learn by Building
+
+<p align="center"><strong>Focused examples. Explicit prerequisites. Practical trade-offs.</strong></p>
+
+[![Repository standards](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml/badge.svg)](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml) [![Read the documentation](https://img.shields.io/badge/Read-the_documentation-2563eb?style=flat-square)](https://gcfernando.github.io/csharp-dotnet-examples/)
+
+</div>
+
+> **Start here:** [Choose an example](#guide-features) · [Run a sample](#guide-quick-start) · [Configure services](#guide-configuration) · [Read the limitations](#guide-troubleshooting-and-limitations)
 
 **Read online:** [Documentation website](https://gcfernando.github.io/csharp-dotnet-examples/) · [All guides](documentation.md)
 
@@ -19,6 +31,8 @@ The [documentation index](documentation.md) lists every sample guide and its pre
 <a id="️-data--integration"></a>
 <a id="️-ui--ux"></a>
 
+<a id="guide-features"></a>
+
 ## ✨ Features
 
 | Area | Examples | Target |
@@ -28,6 +42,8 @@ The [documentation index](documentation.md) lists every sample guide and its pre
 | Data | [SQL Server upserts](SQLWrites/readme.md), [JSONPath queries](JsonSearchPatterns/readme.md) | .NET 10 / .NET 6 |
 | Integration | [Python.NET bridge](PythonBridge/readme.md), [Azure OpenAI chat completion](Simple_ChatCompletion/readme.md), [public IP lookup](PublicIP/readme.md) | .NET 8 / .NET 6 |
 | Interfaces and tests | [Windows Forms DPI](FourKWinForm/README.md), [Spectre.Console](SpectreDemo/readme.md), [FakeLogger tests](Fake/readme.md) | .NET 8 |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -61,6 +77,8 @@ Install an SDK capable of building the selected target and the corresponding run
 | PythonBridge | Compatible Python 3.12 DLL and architecture; Python packages listed in its guide |
 | Simple_ChatCompletion | Azure OpenAI endpoint, deployment and credentials; execution makes paid service requests |
 | FourKWinForm | Windows and the .NET 8 Windows Desktop runtime |
+
+<a id="guide-configuration"></a>
 
 ## ⚙️ Configuration
 
@@ -104,6 +122,8 @@ Documentation verification checked source, project references and local links. I
 
 <a id="-faq"></a>
 <a id="-notes"></a>
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

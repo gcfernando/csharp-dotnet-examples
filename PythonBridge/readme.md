@@ -1,12 +1,20 @@
-# Call Python from C# with Python.NET (pythonnet) — .NET 8 Examples
+[C# and .NET examples](../README.md) · **Python and .NET integration**
+
+<a id="call-python-from-c-with-pythonnet-pythonnet--net-8-examples"></a>
+
+# Call Python from C# with Python.NET
 
 A .NET 8 console application demonstrating **how to call Python code from C#** using [Python.NET](https://github.com/pythonnet/pythonnet) (`pythonnet` 3.0.5) — calling Python functions, passing C# objects to Python, running a scikit-learn model, and hosting a FastAPI app from a .NET process. The project covers four integration scenarios — from basic arithmetic to ML model inference and launching a FastAPI server.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
 
 ## 🔎 Overview
 
 <a id="overview"></a>
 
 Python.NET embeds a Python interpreter (CPython) inside the .NET process. The `Py.GIL()` block acquires the Global Interpreter Lock, after which you can import Python modules, call functions, and exchange objects between C# and Python dynamically.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -40,6 +48,8 @@ python -m pip install joblib numpy scikit-learn fastapi uvicorn
 | Package | Version |
 |---|---|
 | `pythonnet` | 3.0.5 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -87,6 +97,8 @@ Imports `api.py` (which defines a FastAPI `app`) and starts it with `uvicorn` on
 | `train_iris_model.py` | Trains a Naive Bayes classifier on Iris data, saves `iris_nb.pkl` |
 | `api.py` | FastAPI application |
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -112,6 +124,8 @@ PythonBridge/
 ## 🧪 Development and testing
 
 From the repository root, `dotnet build PythonBridge/PythonBridge.csproj` checks the .NET project. Python imports, embedding, model training and the FastAPI server need separate runtime checks; none were launched during this documentation review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

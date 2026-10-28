@@ -1,6 +1,14 @@
-# Unsafe.As in C# — Reinterpret Memory Without Copying (.NET 8 Examples)
+[C# and .NET examples](../README.md) · **Memory and runtime**
+
+<a id="unsafeas-in-c--reinterpret-memory-without-copying-net-8-examples"></a>
+
+# Unsafe.As in C#: Memory Reinterpretation Explained
 
 A .NET 8 console application demonstrating `System.Runtime.CompilerServices.Unsafe.As<TFrom, TTo>()` — a **zero-copy way to reinterpret memory in C#**, treating the bytes of one type as another without any data conversion or allocation.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -16,6 +24,8 @@ dotnet run
 ### Requirements
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -59,6 +69,8 @@ After modification: [01, 02, 03, 04, 05, 06, 07, 08]
 
 The bytes look unchanged after the modification because the code writes `0x0807060504030201`, which is the same value: on a little-endian CPU (x86/x64 and Arm64 on Windows), the lowest byte `01` is stored first. Writing a different value would visibly change the array.
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -75,6 +87,8 @@ UnsafeAs/
 ## 🧪 Development and testing
 
 Build with `dotnet build UnsafeAs/UnsafeAs.csproj`, then use an interactive terminal to compare the output on your architecture and press a key to exit. This review checked the source and unsafe-block project setting; it did not execute memory reinterpretation examples.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

@@ -1,8 +1,16 @@
-# FourKWinForm — High-DPI Windows Forms Example in .NET 8 (C#)
+[C# and .NET examples](../README.md) · **Windows desktop**
+
+<a id="fourkwinform--high-dpi-windows-forms-example-in-net-8-c"></a>
+
+# FourKWinForm — High-DPI Windows Forms Example
 
 A minimal C# Windows Forms application targeting .NET 8 that demonstrates **high-DPI awareness** for 4K and other high-resolution displays. It enables `HighDpiMode.SystemAware` through the project's `ApplicationHighDpiMode` setting, to configure system DPI awareness. Actual appearance depends on the display setup and control layout. The form collects a name and country from two text boxes, then displays a personalised greeting in a message box.
 
 Use it as a starting point when you want to see how a modern .NET 8 WinForms project configures DPI scaling with `ApplicationConfiguration.Initialize()`.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -12,6 +20,8 @@ Use it as a starting point when you want to see how a modern .NET 8 WinForms pro
 - Two text inputs: **Name** and **Country**
 - **Message** button — shows a greeting dialog using the entered values
 - **Exit** button — closes the application cleanly
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -42,6 +52,8 @@ Or open `FourKWinForm.sln` in Visual Studio and press **F5**.
 | Output Type | `WinExe` |
 | DPI Mode | `SystemAware` |
 | Designer DPI Unaware | `true` |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -75,6 +87,8 @@ FourKWinForm/
 ## 🧪 Development and testing
 
 On Windows, build the project and check Message/Exit behavior, empty inputs and the scaling settings you intend to support. Test moving between monitors separately. The source and project settings were reviewed; the GUI was not launched.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

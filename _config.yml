@@ -20,32 +20,32 @@ defaults:
   - scope:
       path: "Durable/DemoOne/readme.md"
     values:
-      title: "Azure Durable Functions Hello World in C# (.NET 8)"
+      title: "Azure Durable Functions: Hello World in C#"
       description: "Run a minimal C# Durable Functions workflow with an HTTP starter, one orchestrator and one activity on the .NET 8 isolated worker."
   - scope:
       path: "Durable/DemoTwo/readme.md"
     values:
-      title: "Azure Durable Functions Chaining Example in C# (.NET 8)"
+      title: "Azure Durable Functions: Function Chaining in C#"
       description: "Chain validation, processing and greeting activities in an HTTP-triggered Azure Durable Functions workflow with the .NET 8 isolated worker."
   - scope:
       path: "Durable/readme.md"
     values:
-      title: "Azure Durable Functions Examples in C# (.NET 8 Isolated Worker)"
+      title: "Azure Durable Functions Examples in C#"
       description: "Learn Azure Durable Functions orchestration with two C# demos: a single-activity workflow and function chaining on the .NET 8 isolated worker."
   - scope:
       path: "Fake/readme.md"
     values:
-      title: "Unit Testing ILogger with FakeLogger in C# (.NET 8)"
+      title: "Test ILogger with FakeLogger and MSTest in C#"
       description: "Test ILogger messages and levels with FakeLogger and MSTest in a .NET 8 C# solution, with assertions that need no mocking library."
   - scope:
       path: "FourKWinForm/README.md"
     values:
-      title: "FourKWinForm — High-DPI Windows Forms Example in .NET 8 (C#)"
+      title: "FourKWinForm — High-DPI Windows Forms Example"
       description: "Build a .NET 8 Windows Forms application with SystemAware high-DPI settings, text inputs and a greeting dialog for high-resolution displays."
   - scope:
       path: "JsonSearchPatterns/readme.md"
     values:
-      title: "JSONPath Query Examples in C# with Newtonsoft.Json (.NET 6)"
+      title: "JSONPath Queries in C# with Newtonsoft.Json"
       description: "Explore 14 Newtonsoft.Json SelectTokens patterns in C#: wildcards, array indexes, recursive descent, filters and regular expressions."
   - scope:
       path: "KeyedService/readme.md"
@@ -55,67 +55,67 @@ defaults:
   - scope:
       path: "Mediat/readme.md"
     values:
-      title: "MediatR and CQRS with Azure Functions in C# (.NET 8)"
+      title: "MediatR and CQRS with Azure Functions in C#"
       description: "Build user commands and queries with MediatR, layered architecture and logging and performance pipeline behaviors in .NET 8 Azure Functions."
   - scope:
       path: "Middleware/Dotnet6/readme.md"
     values:
-      title: "Azure Functions Middleware vs No Middleware — .NET 6 C# Comparison"
+      title: "Azure Functions Middleware: The .NET 6 Comparison"
       description: "Compare .NET 6 Azure Functions with isolated worker middleware and an in-process function, including request transformation and HTTP responses."
   - scope:
       path: "Middleware/Dotnet8/readme.md"
     values:
-      title: "Azure Functions Exception Middleware in C# (.NET 8)"
+      title: "Azure Functions Exception Middleware in .NET 8"
       description: "Transform request bodies and return structured ProblemDetails errors with two isolated worker middleware components in .NET 8 Azure Functions."
   - scope:
       path: "Middleware/README.md"
     values:
-      title: "Azure Functions Middleware Examples in C# (.NET 6 and .NET 8)"
+      title: "Azure Functions Middleware Examples in C#"
       description: "Compare Azure Functions middleware examples for request transformation, shared context and exception handling in C# on .NET 6 and .NET 8."
   - scope:
       path: "PublicIP/readme.md"
     values:
-      title: "Get Your Public IP Address in C# — HttpClient and the ipify API (.NET 6)"
-      description: "A minimal .NET 6 console application that shows how to get your public IP address in C#: it calls the ipify API with HttpClient and prints the result."
+      title: "Get Your Public IP Address in C# with HttpClient"
+      description: "Call the ipify API with HttpClient in a minimal .NET 6 C# console example, print the public IPv4 address and inspect its error handling."
   - scope:
       path: "PythonBridge/readme.md"
     values:
-      title: "Call Python from C# with Python.NET (.NET 8 Examples)"
+      title: "Call Python from C# with Python.NET"
       description: "Call Python functions, pass C# objects, run scikit-learn inference and host FastAPI from a .NET 8 console application with Python.NET."
   - scope:
       path: "README.md"
     values:
-      title: "C# and .NET Examples — Azure Functions, Async and SQL Server"
-      description: "C# and .NET examples for Azure Functions, async programming, dependency injection, SQL Server, testing and desktop applications."
+      title: "C# and .NET Examples — Learn by Building"
+      description: "Explore C# and .NET examples for Azure Functions, async programming, SQL Server, logging tests and Windows Forms. Choose a sample and follow its setup guide."
   - scope:
       path: "SemaphoreSlim/readme.md"
     values:
-      title: "Limit Async Concurrency with SemaphoreSlim in C# (.NET 8)"
-      description: "Throttle concurrent asynchronous file downloads with SemaphoreSlim in a .NET 8 C# console application and inspect the download workflow."
+      title: "Limit Async Concurrency with SemaphoreSlim in C#"
+      description: "Study a C# SemaphoreSlim and ConcurrentQueue example that limits simulated asynchronous work, including its current worker-startup limitation."
   - scope:
       path: "Simple_ChatCompletion/readme.md"
     values:
-      title: "Azure OpenAI Chat Completion in C#: SDK and REST (.NET 8)"
+      title: "Azure OpenAI Chat Completion in C#: SDK and REST"
       description: "Compare Azure.AI.OpenAI SDK and REST calls in C# for extracting structured product information from natural-language queries."
   - scope:
       path: "SpectreDemo/readme.md"
     values:
-      title: "Spectre.Console Example in C# (.NET 8)"
+      title: "Spectre.Console: Rich Terminal Interfaces in C#"
       description: "Build a terminal interface with Spectre.Console live panels, progress bars, selection prompts and colored output in a .NET 8 C# demo."
   - scope:
       path: "SQLWrites/readme.md"
     values:
-      title: "SQL Server Upsert in C#: TVP, SqlBulkCopy and Row-by-Row"
+      title: "SQL Server Upserts in C#: TVP and SqlBulkCopy"
       description: "Compare transactional row-by-row, table-valued parameter and SqlBulkCopy upserts in .NET 10, with rowversion checks and out-of-order event handling."
   - scope:
       path: "TaskErrors/readme.md"
     values:
-      title: "Task.WhenAll Exception Handling in C# — Capturing All Exceptions (.NET 8)"
-      description: "A .NET 8 console application demonstrating how to catch every exception from Task.WhenAll in C#, not just the first one, when several concurrent tasks fail."
+      title: "Handle Every Task.WhenAll Exception in C#"
+      description: "Inspect every faulted task after Task.WhenAll in a .NET 8 C# example, rather than relying only on the exception rethrown by await."
   - scope:
       path: "UnsafeAs/readme.md"
     values:
-      title: "Unsafe.As Memory Reinterpretation in C# (.NET 8)"
+      title: "Unsafe.As in C#: Memory Reinterpretation Explained"
       description: "Explore System.Runtime.CompilerServices.Unsafe.As in C# to reinterpret memory without copying, including examples and type-safety limitations."
 
 # Public documentation navigation and presentation.

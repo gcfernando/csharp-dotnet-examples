@@ -1,6 +1,14 @@
-# Azure Functions Exception Handling Middleware in C# — .NET 8 Isolated Worker
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-functions-exception-handling-middleware-in-c--net-8-isolated-worker"></a>
+
+# Azure Functions Exception Middleware in .NET 8
 
 An Azure Functions v4 project on .NET 8 that demonstrates two **isolated worker middleware** components working together: `UppercaseNameMiddleware` transforms the request body before the handler, and `ExceptionHandlerMiddleware` catches exceptions thrown by the function and returns a structured `ProblemDetails` response with HTTP 400 — a reusable pattern for **global exception handling in Azure Functions**.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -43,6 +51,8 @@ func start --port 7256
 | `Microsoft.Azure.Functions.Worker.ApplicationInsights` | 1.2.0 |
 | `Newtonsoft.Json` | 13.0.3 |
 
+<a id="guide-usage"></a>
+
 ## 💡 Usage
 
 <a id="usage"></a>
@@ -73,6 +83,8 @@ Response:
   "detail": "name not found"
 }
 ```
+
+<a id="guide-architecture"></a>
 
 ## 🏗️ Architecture
 
@@ -141,6 +153,8 @@ Dotnet8/
 ## 🧪 Development and testing
 
 Build `Middleware/Dotnet8/Middleware/Middleware.csproj`, then check a valid name, a missing field and malformed JSON in a configured local host. Compare the returned status and error object with the middleware order. No host or telemetry service was launched in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

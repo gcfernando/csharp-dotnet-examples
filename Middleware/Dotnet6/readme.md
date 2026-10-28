@@ -1,6 +1,14 @@
-# Azure Functions Middleware vs No Middleware — .NET 6 C# Comparison
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-functions-middleware-vs-no-middleware--net-6-c-comparison"></a>
+
+# Azure Functions Middleware: The .NET 6 Comparison
 
 A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one using **isolated worker middleware** (`WithMiddleware`, built on `IFunctionsWorkerMiddleware`) and one without middleware (`WithoutMiddleware`, an in-process function). Both expose a `SendMessage` HTTP POST endpoint that greets the caller by name, but the middleware version transforms the name to uppercase before the function handler runs.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -12,6 +20,8 @@ A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one usin
 | `WithoutMiddleware` | 7162 | In-process model (`Microsoft.NET.Sdk.Functions`), no middleware; the raw `name` field from the JSON body is used as-is |
 
 This comparison also changes the hosting model: it is not a comparison of two otherwise identical apps with just one middleware registration removed. An isolated worker app can also run without custom middleware.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -61,6 +71,8 @@ For the in-process `WithoutMiddleware` project, set `"FUNCTIONS_WORKER_RUNTIME":
 | `Newtonsoft.Json` | 13.0.1 |
 
 `WithoutMiddleware` references only `Microsoft.NET.Sdk.Functions` 4.2.0.
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -129,6 +141,8 @@ Dotnet6/
 ## 🧪 Development and testing
 
 Build the two projects independently and compare the same valid-name request on ports 7052 and 7162. Also check missing names, malformed JSON and whether the selected host provides a seekable request stream. These checks were not executed against a running host in this review.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

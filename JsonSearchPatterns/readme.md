@@ -1,12 +1,20 @@
-# JSONPath Query Examples in C# — Newtonsoft.Json SelectTokens Patterns (.NET 6)
+[C# and .NET examples](../README.md) · **JSON and data**
+
+<a id="jsonpath-query-examples-in-c--newtonsoftjson-selecttokens-patterns-net-6"></a>
+
+# JSONPath Queries in C# with Newtonsoft.Json
 
 A .NET 6 console application demonstrating 14 **JSONPath query patterns in C#** using **Newtonsoft.Json**'s `JObject.SelectTokens` method — wildcards, array indexes, recursive descent, filter expressions with `&&` and `||`, and regular-expression matches. The project serves as a practical reference for navigating complex, nested JSON structures.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
 
 ## 🔎 Overview
 
 <a id="overview"></a>
 
 JSONPath (via `JObject.SelectTokens`) selects values directly from JSON objects and arrays, including nested properties and filter expressions. This project runs fourteen queries against a sample person record (`Data.json`) and prints the results to the console.
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -30,6 +38,8 @@ The application prints the results of each query to the console, separated by bl
 | Package | Version |
 |---|---|
 | `Newtonsoft.Json` | 13.0.3 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -63,6 +73,8 @@ The JSON file describes a person with:
 - `miscellaneous` — array of hobby entries
 - `messageHeader` — id and created date
 
+<a id="guide-architecture"></a>
+
 ## 🏗️ Architecture
 
 ### Project Structure
@@ -79,6 +91,8 @@ JsonSearchPatterns/
 ## 🧪 Development and testing
 
 Run the sample from its folder and compare all fourteen queries with Data.json, including the AND/OR and regex filters. Confirm that changing the working directory without the data file produces the documented limitation. The review checked the query strings and file-copy setting; it did not execute the console sample.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

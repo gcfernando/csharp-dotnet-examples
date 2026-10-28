@@ -1,8 +1,16 @@
 <a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-clean-architecture"></a>
 
-# MediatR CQRS Example with Azure Functions in C# (.NET 8, Layered Architecture)
+[C# and .NET examples](../README.md) · **Application architecture**
+
+<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-layered-architecture"></a>
+
+# MediatR and CQRS with Azure Functions in C#
 
 An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQRS** (Command Query Responsibility Segregation) with a layered architecture and **MediatR pipeline behaviours** for logging and performance monitoring. The solution implements user creation and retrieval through CQRS commands and queries, wired with two MediatR pipeline behaviours.
+
+> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+
+<a id="guide-features"></a>
 
 ## ✨ Features
 
@@ -15,6 +23,8 @@ An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQR
 | `Mediat.Data` | `IUserRepository` interface and in-memory `UserRepository` |
 | `Mediat.Infrastructure` | `LoggingBehavior` and `PerformanceMonitoringBehavior` |
 | `Mediat.Model` | `User` entity (`Id`, `Name`, `Email`) |
+
+<a id="guide-quick-start"></a>
 
 ## 🚀 Quick start
 
@@ -55,6 +65,8 @@ func start --port 7094
 | `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
 | `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
 | `Newtonsoft.Json` | 13.0.3 |
+
+<a id="guide-usage"></a>
 
 ## 💡 Usage
 
@@ -164,6 +176,8 @@ Mediat/
 ## 🧪 Development and testing
 
 Check restore/build compatibility for `Mediat/Mediat.sln` with its `x64` solution platform, then test create, get, missing ID and restart behavior in a local Functions host. The Release solution configuration lacks a `Build.0` entry for `Mediat.Infrastructure`; inspect Configuration Manager and project-reference build behavior before treating a solution build as evidence for every project. Package references and handlers were inspected; restore, host execution and concurrent requests were not tested here.
+
+<a id="guide-troubleshooting-and-limitations"></a>
 
 ## 🛠️ Troubleshooting and limitations
 

@@ -48,7 +48,8 @@ The sections below retain the site's generated page/source navigation for publis
 <tbody>
 {% assign guides = site.html_pages | sort: 'url' %}
 {% for guide in guides %}{% if guide.sitemap != false and guide.url != page.url and guide.url != '/404.html' %}
-<tr><td><a href="{{ guide.url | absolute_url }}">{{ guide.title | default: guide.name | escape }}</a></td><td><a href="https://github.com/{{ site.repository }}/blob/main/{{ guide.path | uri_escape }}">View source</a></td></tr>
+{% assign source_extension = guide.path | split: '.' | last | downcase %}
+<tr><td><a href="{{ guide.url | absolute_url }}">{{ guide.title | default: guide.name | escape }}</a></td><td>{% if source_extension == 'html' or source_extension == 'htm' %}<a href="{{ guide.url | absolute_url }}">Open page</a>{% else %}<a href="https://github.com/{{ site.repository }}/blob/main/{{ guide.path | uri_escape }}">View source</a>{% endif %}</td></tr>
 {% endif %}{% endfor %}
 {% for guide in site.static_files %}{% if guide.extname == '.html' and guide.sitemap != false %}
 <tr><td><a href="{{ guide.path | uri_escape | absolute_url }}">{% if guide.path == '/Linux_Commands/index.html' %}Linux Command Reference{% elsif guide.path contains 'AI-Learning-Atlas' %}AI Learning Atlas{% elsif guide.path contains 'ai_coding_plugins_beginners_guide' %}AI Coding Add-ons: Beginner’s Guide{% elsif guide.path contains 'Wifi Radar' %}WiFi Radar — static interface preview{% else %}{{ guide.name | escape }} — {{ guide.path | escape }}{% endif %}</a></td><td><code>{{ guide.path | escape }}</code></td></tr>

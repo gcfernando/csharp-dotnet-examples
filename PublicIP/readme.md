@@ -1,25 +1,29 @@
-[C# and .NET examples](../README.md) · **HTTP and integration**
-
-<a id="get-your-public-ip-address-in-c--httpclient-and-the-ipify-api-net-6"></a>
-
 # Get Your Public IP Address in C# with HttpClient
 
 A minimal .NET 6 console application that shows **how to get your public IP address in C#**: it calls the [ipify](https://www.ipify.org/) API with `HttpClient` and prints the result.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **HTTP and integration**
+
+<a id="get-your-public-ip-address-in-c--httpclient-and-the-ipify-api-net-6"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `PublicIP/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd PublicIP
 dotnet run
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -28,7 +32,9 @@ dotnet run
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### How It Works
 
@@ -42,7 +48,9 @@ Your public IP Address: 203.0.113.42
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -53,13 +61,17 @@ PublicIP/
 └── PublicIP.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 If you choose to run the network example, verify either an address message or a handled error, then supply console input to exit. This documentation review inspected the URL and error handler without contacting the external service.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Notes
 
@@ -68,7 +80,9 @@ If you choose to run the network example, verify either an address message or a 
 
 The source uses plain HTTP and depends on an external service. Network or proxy failures are caught and printed; there is no retry policy or caller-provided cancellation token. After the request, Console.Read waits for input. The example IP address is illustrative, not a captured network result.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

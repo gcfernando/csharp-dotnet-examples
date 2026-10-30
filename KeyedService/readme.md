@@ -1,14 +1,18 @@
-[C# and .NET examples](../README.md) · **Dependency injection**
-
-<a id="keyed-services-in-net-8-dependency-injection--azure-functions-example-c"></a>
-
 # Keyed Dependency Injection in .NET 8 Azure Functions
 
 An Azure Functions v4 demo on .NET 8 that demonstrates **keyed dependency injection** (`AddKeyedScoped` / `[FromKeyedServices]`) in the isolated worker model. Three HTTP endpoints each receive a different implementation of the same `INotification` interface, selected by its registered key — a way to choose between email, SMS, and push strategies without writing a factory class.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Dependency injection**
 
-## 🔎 Overview
+<a id="keyed-services-in-net-8-dependency-injection--azure-functions-example-c"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `KeyedService/`. Build the selected project with the SDK and platform declared in its project file.
+
+<a id="-overview"></a>
+
+## Overview
 
 <a id="overview"></a>
 
@@ -16,7 +20,9 @@ An Azure Functions v4 demo on .NET 8 that demonstrates **keyed dependency inject
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Functions
 
@@ -30,16 +36,18 @@ Each function calls `INotification.NotifyAsync(message)` on its injected impleme
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 ```bash
 cd KeyedService
 func start --port 7194
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -73,7 +81,9 @@ func start --port 7194
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### DI Registration
 
@@ -108,7 +118,9 @@ Each returns a plain-text confirmation such as `notification sent [EMAIL]`.
 
 The `EmailNotification`, `PushNotification`, and `SmsNotification` implementations only log the message (they await `Task.CompletedTask`); replace them with real email, push, or SMS providers in your own application.
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -132,13 +144,17 @@ KeyedService/
 └── KeyedService.csproj
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build with `dotnet build KeyedService/KeyedService.csproj` from the repository root. In a configured local host, invoke each of the three GET routes and compare its confirmation with the logged channel. No host or telemetry service was launched in this review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -150,7 +166,9 @@ Yes — this project uses them in the .NET 8 isolated worker model with construc
 
 The three notification implementations only log messages. No email, SMS or push service is contacted. When using `UseDevelopmentStorage=true`, start Azurite before the Functions host. Example routes are local; the source declares function-level authorization for hosted endpoints.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

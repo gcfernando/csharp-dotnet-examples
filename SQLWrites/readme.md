@@ -1,18 +1,20 @@
-[C# and .NET examples](../README.md) · **SQL Server and data**
-
-<a id="sql-server-upsert-in-c--row-by-row-vs-table-valued-parameters-vs-sqlbulkcopy-net-10"></a>
-
 # SQL Server Upserts in C#: TVP and SqlBulkCopy
 
 A .NET 10 solution comparing three **SQL Server upsert strategies in C#** with `Microsoft.Data.SqlClient` for a `CustomerActivityEvent` record: row-by-row transactions, **table-valued parameters (TVP)** with a stored procedure, and **`SqlBulkCopy`** into a staging table followed by a reconcile procedure. All strategies support an optional optimistic-concurrency check (`rowversion`), ignore out-of-order (older) events, and are wrapped in a shared transient-fault retry policy with overload-specific retry behavior.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **SQL Server and data**
+
+<a id="sql-server-upsert-in-c--row-by-row-vs-table-valued-parameters-vs-sqlbulkcopy-net-10"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `SQLWrites/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 After reviewing the configuration below and preparing a disposable database, run from the repository root (each command is independent):
 
@@ -27,7 +29,9 @@ dotnet run --project SQLWrites/UseTvp
 dotnet run --project SQLWrites/UseBulk
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -40,7 +44,9 @@ dotnet run --project SQLWrites/UseBulk
 |---|---|
 | `Microsoft.Data.SqlClient` | 6.1.3 |
 
-## ⚙️ Configuration
+<a id="-configuration"></a>
+
+## Configuration
 
 ### Database Setup
 
@@ -62,7 +68,9 @@ var connectionString = "Data Source=<server>;Initial Catalog=<db>;Integrated Sec
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### The Data Model
 
@@ -123,7 +131,9 @@ The non-generic `ExecuteAsync` overload catches selected `SqlException` failures
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -146,13 +156,17 @@ SQLWrites/
 └── SQLWrites.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 A build that does not run the writers is `dotnet build SQLWrites/SQLWrites.sln` from the repository root. Validate schema and behavior only against a disposable database. Include duplicate IDs, equal/older timestamps, mismatched row versions, partial bulk-copy failure and retries after an uncertain commit. This documentation review did not run SQL scripts or database writers.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -177,12 +191,14 @@ The reconciliation query reads staging rows with `READPAST` and then deletes row
 
 `SQLWrites/UseTvp/bin` and `obj` contain tracked build outputs, dependency DLLs and caches in this checkout. Use the project/source files for builds and review; the committed outputs do not establish that the current source has passed validation.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 
 - [Contact Book — Python GUI using SQL Server stored procedures](https://github.com/gcfernando/python-projects-and-examples/blob/main/GUI_Apps/README.md)
-- [Local SQL Server and other databases with Podman Compose](https://github.com/gcfernando/developer-tools-and-guides#-local-services-stack)
+- [Local SQL Server and other databases with Podman Compose](https://github.com/gcfernando/developer-guides-and-tools/blob/main/examples/containers/local-services/README.md)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---

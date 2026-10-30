@@ -1,16 +1,20 @@
-[C# and .NET examples](../../README.md) · **Azure Functions**
-
-<a id="azure-functions-middleware-vs-no-middleware--net-6-c-comparison"></a>
-
 # Azure Functions Middleware: The .NET 6 Comparison
 
 A side-by-side comparison of two Azure Functions v4 projects on .NET 6: one using **isolated worker middleware** (`WithMiddleware`, built on `IFunctionsWorkerMiddleware`) and one without middleware (`WithoutMiddleware`, an in-process function). Both expose a `SendMessage` HTTP POST endpoint that greets the caller by name, but the middleware version transforms the name to uppercase before the function handler runs.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-functions-middleware-vs-no-middleware--net-6-c-comparison"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Middleware/Dotnet6/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Projects
 
@@ -23,9 +27,9 @@ This comparison also changes the hosting model: it is not a comparison of two ot
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 From the repository root, use a separate terminal for each command group:
 
@@ -39,7 +43,9 @@ cd Middleware/Dotnet6/WithoutMiddleware
 func start --port 7162
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -74,7 +80,9 @@ For the in-process `WithoutMiddleware` project, set `"FUNCTIONS_WORKER_RUNTIME":
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### How the Middleware Works
 
@@ -118,7 +126,9 @@ curl -X POST http://localhost:7162/api/SendMessage \
 
 Response: `Hello, alice. This HTTP triggered function executed successfully.` (with no `name`, it asks you to pass one).
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -138,17 +148,23 @@ Dotnet6/
 └── readme.md
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build the two projects independently and compare the same valid-name request on ports 7052 and 7162. Also check missing names, malformed JSON and whether the selected host provides a seekable request stream. These checks were not executed against a running host in this review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 Start Azurite for the development storage setting. The isolated middleware sets `requestData.Body.Position = 0`; a non-seekable body stream can fail at that line. It parses and logs the entire request body without an exception handler or sensitive-field redaction. The examples use Bash curl syntax; on PowerShell, use curl.exe with appropriate JSON quoting or Invoke-RestMethod.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

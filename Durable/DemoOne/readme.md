@@ -1,16 +1,20 @@
-[C# and .NET examples](../../README.md) · **Azure Functions**
-
-<a id="azure-durable-functions-hello-world-in-c--demoone-net-8-isolated-worker"></a>
-
 # Azure Durable Functions: Hello World in C#
 
 A minimal **Azure Durable Functions** v4 example in C# that runs a single-activity orchestration pipeline on the .NET 8 isolated worker. It is a good first step for learning how an HTTP starter (`DurableTaskClient`), an orchestrator (`TaskOrchestrationContext`), and an activity function work together. An HTTP trigger receives a JSON body, starts an orchestrator, and the orchestrator calls one activity that returns a personalised greeting.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-hello-world-in-c--demoone-net-8-isolated-worker"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Durable/DemoOne/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Functions
 
@@ -22,16 +26,18 @@ A minimal **Azure Durable Functions** v4 example in C# that runs a single-activi
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 ```bash
 cd Durable/DemoOne
 func start --port 7239
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -65,7 +71,9 @@ func start --port 7239
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 <a id="usage"></a>
 
@@ -87,7 +95,9 @@ curl -X POST http://localhost:7239/api/func-message-validator \
 Request body cannot be empty.
 ```
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 <a id="architecture"></a>
 
@@ -120,13 +130,17 @@ DemoOne/
 └── DemoOne.csproj
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 From the repository root, build with `dotnet build Durable/DemoOne/DemoOne.csproj -p:Platform=x64`. The project declares only the `x64` platform; its solution's Any CPU configurations map to x64 but omit the corresponding `Build.0` entries, so select x64 or build the project explicitly when verifying it. In a configured local host, verify the greeting value, exact HTTP encoding and empty-body 400 response. Source and paths were checked; host execution was not performed.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Notes
 
@@ -135,7 +149,9 @@ From the repository root, build with `dotnet build Durable/DemoOne/DemoOne.cspro
 
 Only an empty request body is rejected explicitly. Malformed JSON and a missing `name` are not validated as a complete API contract. The starter waits without an explicit timeout or cancellation token and does not inspect the orchestration failure status. The exact HTTP serialization has not been checked against a running host.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

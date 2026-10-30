@@ -1,16 +1,20 @@
-[C# and .NET examples](../README.md) · **Azure Functions**
-
-<a id="azure-durable-functions-examples-in-c--function-chaining-with-the-net-8-isolated-worker"></a>
-
 # Azure Durable Functions Examples in C#
 
 Two runnable **Azure Durable Functions** v4 demos that demonstrate stateful, chained orchestration pipelines using the **isolated worker model on .NET 8**. Each demo starts an orchestration from an HTTP trigger, calls one or more activity functions in sequence (the *function chaining* pattern), and waits for the result before responding.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-examples-in-c--function-chaining-with-the-net-8-isolated-worker"></a>
+
+## Start here
+
+Start with [DemoOne](DemoOne/readme.md), then compare [DemoTwo](DemoTwo/readme.md). Both need their own local settings and storage; DemoTwo has a documented response defect.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Projects
 
@@ -21,9 +25,9 @@ Two runnable **Azure Durable Functions** v4 demos that demonstrate stateful, cha
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Quick Start
+## Quick start
 
 From the repository root, use a separate terminal for each command group:
 
@@ -41,7 +45,9 @@ See each project's own readme — [DemoOne](./DemoOne/readme.md) and [DemoTwo](.
 
 > **Known issue in DemoTwo:** its HTTP starter currently returns `400 Bad Request` after a completed orchestration reaches its output check, including valid names. See [DemoTwo's known issue](./DemoTwo/readme.md#known-issue) for the cause and a fix.
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -61,7 +67,9 @@ Both projects use the same package versions:
 | `Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore` | 2.0.1 |
 | `Microsoft.Azure.Functions.Worker.Sdk` | 2.0.2 |
 
-## ⚙️ Configuration
+<a id="-configuration"></a>
+
+## Configuration
 
 ### Minimum `local.settings.json`
 
@@ -79,23 +87,31 @@ Each project requires its own `local.settings.json` (not committed to source con
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### What Are Durable Functions?
 
 Azure Durable Functions is an extension of Azure Functions that lets you write stateful workflows in a serverless environment. Orchestrator functions define the workflow logic and call activity functions, while the Durable Task Framework manages orchestration state and checkpoints. These samples do not configure activity retry policies.
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build DemoOne and DemoTwo separately, then start each host with its own local settings and storage. Check a normal name, an empty body and malformed JSON; inspect orchestration status as well as the HTTP response. No Functions host or storage emulator was launched in this review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 Both starters wait for completion without an explicit timeout or cancellation token. Activity retries are not configured in these samples. Local storage settings must be created separately for each project, with Azurite running when using the development connection string.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

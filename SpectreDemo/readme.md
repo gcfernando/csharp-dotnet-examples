@@ -1,16 +1,20 @@
-[C# and .NET examples](../README.md) · **Terminal interfaces**
-
-<a id="spectreconsole-example-in-c--live-panels-progress-bars-and-prompts-net-8"></a>
-
 # Spectre.Console: Rich Terminal Interfaces in C#
 
 A .NET 8 console application demonstrating how to build a **rich terminal UI in C#** with the [Spectre.Console](https://spectreconsole.net/) library. The app simulates an interactive data collection workflow with live panels, multi-task progress bars, and a selection prompt — all with coloured text and animated UI elements.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Terminal interfaces**
+
+<a id="spectreconsole-example-in-c--live-panels-progress-bars-and-prompts-net-8"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `SpectreDemo/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 <a id="features"></a>
 
@@ -21,16 +25,18 @@ A .NET 8 console application demonstrating how to build a **rich terminal UI in 
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd SpectreDemo
 dotnet run
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -45,7 +51,9 @@ dotnet run
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### Workflow
 
@@ -64,7 +72,9 @@ dotnet run
 
 `Spectre.Console.Cli` is referenced in the project file but not used by `Program.cs`.
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -75,17 +85,23 @@ SpectreDemo/
 └── SpectreDemo.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 In an interactive terminal, check the four panel stages, completion of all three progress bars and both restart choices. The source and package references were checked; terminal interaction was not executed in this review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 The progress bars are advanced by one synchronous loop with Thread.Sleep. They represent simulated jobs, not parallel downloads or analysis. Use an interactive terminal for the selection prompt; redirected output may not render live updates or accept selections.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

@@ -1,25 +1,29 @@
-[C# and .NET examples](../../README.md) · **Azure Functions**
-
-<a id="azure-functions-exception-handling-middleware-in-c--net-8-isolated-worker"></a>
-
 # Azure Functions Exception Middleware in .NET 8
 
 An Azure Functions v4 project on .NET 8 that demonstrates two **isolated worker middleware** components working together: `UppercaseNameMiddleware` transforms the request body before the handler, and `ExceptionHandlerMiddleware` catches exceptions thrown by the function and returns a structured `ProblemDetails` response with HTTP 400 — a reusable pattern for **global exception handling in Azure Functions**.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-functions-exception-handling-middleware-in-c--net-8-isolated-worker"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Middleware/Dotnet8/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 ```bash
 cd Middleware/Dotnet8/Middleware
 func start --port 7256
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -53,7 +57,9 @@ func start --port 7256
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 <a id="usage"></a>
 
@@ -86,7 +92,9 @@ Response:
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Middleware Pipeline
 
@@ -150,17 +158,23 @@ Dotnet8/
     └── Middleware.csproj
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build `Middleware/Dotnet8/Middleware/Middleware.csproj`, then check a valid name, a missing field and malformed JSON in a configured local host. Compare the returned status and error object with the middleware order. No host or telemetry service was launched in this review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 Start Azurite for the development storage setting. The uppercase middleware runs before the exception handler, so its parsing failures are outside that catch block. It rewinds only its copy of the body; it does not replace or rewind the original request body. It logs input and error details, and maps caught exceptions to 400 regardless of cause. Do not pass confidential request data to this demonstration. The curl examples use Bash syntax.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

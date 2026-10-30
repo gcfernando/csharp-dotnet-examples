@@ -1,25 +1,29 @@
-[C# and .NET examples](../README.md) · **Memory and runtime**
-
-<a id="unsafeas-in-c--reinterpret-memory-without-copying-net-8-examples"></a>
-
 # Unsafe.As in C#: Memory Reinterpretation Explained
 
 A .NET 8 console application demonstrating `System.Runtime.CompilerServices.Unsafe.As<TFrom, TTo>()` — a **zero-copy way to reinterpret memory in C#**, treating the bytes of one type as another without any data conversion or allocation.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Memory and runtime**
+
+<a id="unsafeas-in-c--reinterpret-memory-without-copying-net-8-examples"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `UnsafeAs/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd UnsafeAs
 dotnet run
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -27,7 +31,9 @@ dotnet run
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### What Is Unsafe.As?
 
@@ -71,7 +77,9 @@ The bytes look unchanged after the modification because the code writes `0x08070
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -84,13 +92,17 @@ UnsafeAs/
 └── UnsafeAs.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build with `dotnet build UnsafeAs/UnsafeAs.csproj`, then use an interactive terminal to compare the output on your architecture and press a key to exit. This review checked the source and unsafe-block project setting; it did not execute memory reinterpretation examples.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Notes
 
@@ -100,7 +112,9 @@ The output examples follow the source on a little-endian machine; they were not 
 
 Memory layout, endianness, size and alignment affect these results. A reference reinterpretation is not a checked numeric conversion. The byte-array example assumes at least eight accessible bytes, and the shown values assume little-endian storage. The application waits for Console.ReadKey after printing output.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

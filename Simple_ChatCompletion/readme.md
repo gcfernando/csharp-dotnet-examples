@@ -1,14 +1,18 @@
-[C# and .NET examples](../README.md) · **AI integration**
-
-<a id="azure-openai-chat-completion-in-c--azureaiopenai-sdk-vs-rest-api-net-8"></a>
-
 # Azure OpenAI Chat Completion in C#: SDK and REST
 
 A .NET 8 console application that demonstrates two ways to call an **Azure OpenAI chat completion** endpoint from C#: via the **`Azure.AI.OpenAI` NuGet package** and via a **raw HTTP REST call**. Both approaches use the same system prompt, which instructs the model to extract a product code and attributes from a natural-language query and return structured JSON.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **AI integration**
 
-## 🔎 Overview
+<a id="azure-openai-chat-completion-in-c--azureaiopenai-sdk-vs-rest-api-net-8"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Simple_ChatCompletion/`. Build the selected project with the SDK and platform declared in its project file.
+
+<a id="-overview"></a>
+
+## Overview
 
 <a id="overview"></a>
 
@@ -27,16 +31,18 @@ For queries unrelated to products, the system prompt requests a polite refusal; 
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd Simple_ChatCompletion
 dotnet run
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -50,7 +56,9 @@ dotnet run
 | `Azure.AI.OpenAI` | 2.1.0 |
 | `Newtonsoft.Json` | 13.0.3 |
 
-## ⚙️ Configuration
+<a id="-configuration"></a>
+
+## Configuration
 
 <a id="configuration"></a>
 
@@ -68,7 +76,9 @@ All connection settings are defined in `Configuration.cs`:
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### Connection Methods
 
@@ -100,7 +110,9 @@ I am sorry, I cannot help with your request. Your question is not related to pro
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -118,13 +130,17 @@ Simple_ChatCompletion/
 └── Simple_ChatCompletion.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build the project after reviewing credential handling. A separate integration check would need an authorized Azure OpenAI deployment and should inspect SDK and REST failures as well as successful responses. No service requests or credentials were used in this documentation review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -136,11 +152,13 @@ In Azure OpenAI, requests target a *deployment name* that you create in your res
 
 Settings are compile-time constants. Neither caller reads environment variables, user secrets, Key Vault or Entra credentials as written; adding those requires a code change. The REST URL concatenation expects EndPoint to end with a slash. The sample config names an API version and deployment, but current resource availability and access were not verified. Four requests are attempted in sequence if all earlier calls succeed. JSON output is requested by a prompt only, with no response schema or JSON validation; model text and refusals are not guaranteed.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 
-- [Local AI chat app with Ollama and Streamlit](https://github.com/gcfernando/developer-guides-and-cheatsheets/blob/main/local_ai_learning_lab.md)
+- [Local AI chat app with Ollama and Streamlit](https://github.com/gcfernando/developer-guides-and-tools/blob/main/docs/ai/local-ai-chat-lab.md)
 - [Back to all C# and .NET code examples](../README.md)
 
 ---

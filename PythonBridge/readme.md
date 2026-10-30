@@ -1,14 +1,18 @@
-[C# and .NET examples](../README.md) · **Python and .NET integration**
-
-<a id="call-python-from-c-with-pythonnet-pythonnet--net-8-examples"></a>
-
 # Call Python from C# with Python.NET
 
 A .NET 8 console application demonstrating **how to call Python code from C#** using [Python.NET](https://github.com/pythonnet/pythonnet) (`pythonnet` 3.0.5) — calling Python functions, passing C# objects to Python, running a scikit-learn model, and hosting a FastAPI app from a .NET process. The project covers four integration scenarios — from basic arithmetic to ML model inference and launching a FastAPI server.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Python and .NET integration**
 
-## 🔎 Overview
+<a id="call-python-from-c-with-pythonnet-pythonnet--net-8-examples"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `PythonBridge/`. Build the selected project with the SDK and platform declared in its project file.
+
+<a id="-overview"></a>
+
+## Overview
 
 <a id="overview"></a>
 
@@ -16,9 +20,9 @@ Python.NET embeds a Python interpreter (CPython) inside the .NET process. The `P
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 After installing the matching Python DLL and packages, build and run from the output directory so model training and loading use the same location:
 
@@ -31,7 +35,9 @@ dotnet PythonBridge.dll
 
 Program.cs invokes the four scenarios sequentially and waits for input if they all return. Earlier embedding or model-loading failures can prevent later scenarios from running. The `PyScript/*.py` files are copied to the build output, and each caller adds that folder to Python's `sys.path` before importing the modules.
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -51,7 +57,9 @@ python -m pip install joblib numpy scikit-learn fastapi uvicorn
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### Scenarios
 
@@ -99,7 +107,9 @@ Imports `api.py` (which defines a FastAPI `app`) and starts it with `uvicorn` on
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -121,13 +131,17 @@ PythonBridge/
 └── PythonBridge.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 From the repository root, `dotnet build PythonBridge/PythonBridge.csproj` checks the .NET project. Python imports, embedding, model training and the FastAPI server need separate runtime checks; none were launched during this documentation review.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Troubleshooting
 
@@ -137,7 +151,9 @@ From the repository root, `dotnet build PythonBridge/PythonBridge.csproj` checks
 
 The trainer writes `iris_nb.pkl` relative to the current working directory, while `IrisCode` looks for it in `AppDomain.CurrentDomain.BaseDirectory`. With dotnet run from the source folder these locations usually differ, so first-run training can succeed but loading can fail before FastAPI starts. Build first, then run the DLL from its output directory to align the paths, or review a code fix separately. Each scenario initializes and shuts down Python; repeated interpreter initialization and native package compatibility were not runtime-tested. Only load trusted joblib/pickle models.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

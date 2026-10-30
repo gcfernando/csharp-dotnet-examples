@@ -1,14 +1,18 @@
-[C# and .NET examples](../README.md) · **Testing and logging**
-
-<a id="unit-testing-ilogger-with-fakelogger-in-c--net-8-mstest-example"></a>
-
 # Test ILogger with FakeLogger and MSTest in C#
 
 A .NET 8 solution demonstrating how to **unit test logging in C#** with `FakeLogger<T>` from the `Microsoft.Extensions.Diagnostics.Testing` package. It shows how to assert on log messages and log levels written through `ILogger<T>` — without a mocking library, custom test doubles, or capturing console output.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Testing and logging**
 
-## 🔎 Overview
+<a id="unit-testing-ilogger-with-fakelogger-in-c--net-8-mstest-example"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Fake/`. Build the selected project with the SDK and platform declared in its project file.
+
+<a id="-overview"></a>
+
+## Overview
 
 <a id="overview"></a>
 
@@ -16,7 +20,9 @@ The project shows how to verify logging behaviour in tests without mocking or ca
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Projects
 
@@ -27,9 +33,9 @@ The project shows how to verify logging behaviour in tests without mocking or ca
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Test
+## Quick start
 
 ```bash
 cd Fake
@@ -37,7 +43,9 @@ dotnet build
 dotnet test
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -65,7 +73,9 @@ dotnet test
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### The Class Under Test
 
@@ -80,7 +90,9 @@ public int? Divide(int dividend, int divisor)
 
 Returns `null` if division fails (e.g. division by zero).
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -97,7 +109,9 @@ Fake/
 
 `Fake.Data` also contains a small console `Program.cs` that runs the calculator with a console logger, so you can see the same log messages outside the tests.
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 ### Tests
 
@@ -110,7 +124,9 @@ Run `dotnet test Fake/Fake.sln` from the repository root to execute the two comm
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -122,7 +138,9 @@ Yes. It comes from the `Microsoft.Extensions.Diagnostics.Testing` package and do
 
 The tests assert the latest message or log level, not complete logging history or every calculator result. `Divide` performs integer division and catches exceptions, returning null on failure. No performance benchmark is included.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

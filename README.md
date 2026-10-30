@@ -1,29 +1,25 @@
+# C# and .NET examples
+
+Independent C# examples for learning Azure Functions, asynchronous programming, SQL Server upserts, Windows Forms, console interfaces and Python interoperability.
+
+[![Repository standards](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml/badge.svg)](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml) [![Read the documentation](https://img.shields.io/badge/Read-the_documentation-2563eb?style=flat-square)](https://gcfernando.github.io/csharp-dotnet-examples/)
+
 <a id="-summary"></a>
 <a id="overview"></a>
 
 <a id="c-and-net-examples--azure-functions-async-and-sql-server"></a>
 
-<div align="center" markdown="1">
+<a id="c-and-net-examples--learn-by-building"></a>
 
-# C# and .NET Examples — Learn by Building
+<a id="-overview"></a>
 
-<p align="center"><strong>Focused examples. Explicit prerequisites. Practical trade-offs.</strong></p>
+## Start here
 
-[![Repository standards](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml/badge.svg)](https://github.com/gcfernando/csharp-dotnet-examples/actions/workflows/repository-standards.yml) [![Read the documentation](https://img.shields.io/badge/Read-the_documentation-2563eb?style=flat-square)](https://gcfernando.github.io/csharp-dotnet-examples/)
+Choose one example from the index below. For a first run, use the [Task.WhenAll example](TaskErrors/readme.md); it needs .NET 8 and no external service. Each folder has its own project, requirements and guide.
 
-</div>
+There is no root application or shared build. Targets include .NET 6, .NET 8 and .NET 10; some examples need Windows, Azure, SQL Server or a compatible Python installation.
 
-> **Start here:** [Choose an example](#guide-features) · [Run a sample](#guide-quick-start) · [Configure services](#guide-configuration) · [Read the limitations](#guide-troubleshooting-and-limitations)
-
-**Read online:** [Documentation website](https://gcfernando.github.io/csharp-dotnet-examples/) · [All guides](documentation.md)
-
-Focused C# samples for learning Azure Functions, asynchronous programming, SQL Server upserts, Windows Forms, terminal interfaces and Python interoperability.
-
-## 🔎 Overview
-
-Choose one sample at a time. This repository contains independent solutions targeting .NET 6, .NET 8 and .NET 10, with different runtime and service requirements. It has no single application or root solution.
-
-The [documentation index](documentation.md) lists every sample guide and its prerequisites. These are learning examples; read the limitations before adapting a pattern.
+<a id="features"></a>
 
 <a id="-core-net-concepts"></a>
 <a id="project-highlights"></a>
@@ -33,7 +29,9 @@ The [documentation index](documentation.md) lists every sample guide and its pre
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Example index
 
 | Area | Examples | Target |
 |---|---|---|
@@ -45,7 +43,9 @@ The [documentation index](documentation.md) lists every sample guide and its pre
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
+
+## Quick start
 
 Run a small console example that needs no external service, from a terminal with the .NET 8 SDK and runtime installed:
 
@@ -62,11 +62,13 @@ Custom Error Method One
 Custom Error Method Two
 ```
 
-This is expected output inferred from [Program.cs](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/TaskErrors/Program.cs), not a live execution result from this documentation review.
+See [Program.cs](TaskErrors/Program.cs) for the two tasks and exception-handling flow.
 
 <a id="️-tech-stack"></a>
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 Install an SDK capable of building the selected target and the corresponding runtime for execution. A newer SDK alone does not guarantee an older runtime is installed. Restore uses the package references in each `.csproj`; there is no repository-wide dependency installation step.
 
@@ -78,15 +80,9 @@ Install an SDK capable of building the selected target and the corresponding run
 | Simple_ChatCompletion | Azure OpenAI endpoint, deployment and credentials; execution makes paid service requests |
 | FourKWinForm | Windows and the .NET 8 Windows Desktop runtime |
 
-<a id="guide-configuration"></a>
+<a id="-usage"></a>
 
-## ⚙️ Configuration
-
-Functions projects expect an untracked `local.settings.json` in the function project folder. The correct `FUNCTIONS_WORKER_RUNTIME` differs between the .NET 6 in-process baseline and isolated projects; follow the [middleware guide](Middleware/README.md).
-
-SQL connection strings, Python DLL selection and Azure OpenAI constants currently live in sample source files. These applications do not all read environment variables or .NET user secrets automatically. Read the sample guide before changing configuration and keep real credentials out of commits.
-
-## 💡 Usage
+## Usage
 
 From the repository root, choose an explicit project or solution:
 
@@ -104,9 +100,23 @@ dotnet run
 
 Start Functions with `func start` from the function project folder after its local settings and storage emulator are ready. See each guide for routes and ports.
 
+<a id="guide-configuration"></a>
+
+<a id="-configuration"></a>
+
+## Configuration
+
+Functions projects expect an untracked `local.settings.json` in the function project folder. The correct `FUNCTIONS_WORKER_RUNTIME` differs between the .NET 6 in-process baseline and isolated projects; follow the [middleware guide](Middleware/README.md).
+
+SQL connection strings, Python DLL selection and Azure OpenAI constants currently live in sample source files. These applications do not all read environment variables or .NET user secrets automatically. Read the sample guide before changing configuration and keep real credentials out of commits.
+
+<a id="architecture"></a>
+
 <a id="-repository-map"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Repository layout
 
 Folders isolate the examples. `Fake`, `SQLWrites` and `Mediat` contain multiple projects and solution files; `Durable` and `Middleware` group several independently hosted apps. Most other folders contain one console or desktop application. The `.csproj` files are the source of truth for target frameworks and packages. Some solutions have x64-only or incomplete configuration mappings; see the Durable DemoOne and MediatR guides. Tracked `SQLWrites/UseTvp/bin` and `obj` files are historical generated outputs and dependencies, not a substitute for building the selected source.
 
@@ -114,18 +124,22 @@ The `_config.yml`, `_layouts` and `assets` folders support the documentation sit
 
 <a id="-testing--utilities"></a>
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Build only the sample you are changing, for example `dotnet build TaskErrors/TaskErrors.csproj`. The committed automated test project is [Fake.Test](https://github.com/gcfernando/csharp-dotnet-examples/blob/main/Fake/Fake.Test/CalculateTest.cs), with two MSTest checks for log messages and error levels. There is no shared application test suite or application CI build in this checkout; the Repository standards workflow checks metadata separately.
 
-Documentation verification checked source, project references and local links. It did not launch GUIs, Functions hosts, SQL scripts, Python embedding or Azure OpenAI requests.
+For documentation and metadata changes, run `python .github/scripts/check_repository.py` with Python 3.12 or later. See [Contributing](CONTRIBUTING.md) for the scope of that check.
 
 <a id="-faq"></a>
 <a id="-notes"></a>
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 - **Wrong SDK or runtime:** inspect the selected `.csproj` and `dotnet --list-sdks` / `dotnet --list-runtimes`.
 - **Functions startup:** confirm the worker model, local settings and storage availability before testing HTTP routes.
@@ -133,18 +147,24 @@ Documentation verification checked source, project references and local links. I
 - **Integration examples:** PythonBridge has a model-file path mismatch; Mediat has mixed MediatR package generations and an unsynchronized in-memory store. Review their guides before use.
 - **Performance:** SQLWrites contains example batch sizes, not published benchmark results.
 
-## 🤝 Contributing
+<a id="-contributing"></a>
+
+## Contributing
 
 Keep changes focused on one sample, state its target framework and prerequisites, and include relevant build/test evidence. Update the sample guide when changing configuration, output or known limitations. Use placeholder data and credentials.
 
-## 🔒 Security
+<a id="-security"></a>
+
+## Security
 
 Do not include secrets or personal data in issues, logs or examples. For sensitive reports, use a private reporting option if the repository provides one; otherwise contact the maintainer privately before sharing details. See the [security policy](SECURITY.md) for private reporting.
 
 <a id="-related-projects"></a>
 <a id="documentation-links"></a>
 
-## 📄 Support and license
+<a id="-support-and-license"></a>
+
+## Support and license
 
 Use [repository issues](https://github.com/gcfernando/csharp-dotnet-examples/issues) for reproducible questions and defects. No repository license file is present in this checkout; confirm permission before reusing or redistributing code. Package dependencies retain their own licenses.
 

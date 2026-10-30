@@ -1,16 +1,22 @@
-[C# and .NET examples](../../README.md) · **Azure Functions**
-
-<a id="azure-durable-functions-function-chaining-example-in-c--demotwo-net-8"></a>
-
 # Azure Durable Functions: Function Chaining in C#
 
 An **Azure Durable Functions** v4 example of the **function chaining** pattern in C#. An HTTP trigger starts an orchestrator that calls three activity functions in sequence — input validation with a regular expression, processing, and greeting generation — passing each activity's output to the next one.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../../README.md) · **Azure Functions**
+
+<a id="azure-durable-functions-function-chaining-example-in-c--demotwo-net-8"></a>
+
+## Start here
+
+**Known issue:** the starter returns HTTP 400 when completed orchestration output reaches its final check, including valid names. See the explanation below before interpreting responses.
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Durable/DemoTwo/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Functions
 
@@ -24,16 +30,18 @@ An **Azure Durable Functions** v4 example of the **function chaining** pattern i
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 ```bash
 cd Durable/DemoTwo
 func start --port 7176
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -67,7 +75,9 @@ func start --port 7176
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### Validation Rule
 
@@ -95,7 +105,9 @@ curl -X POST http://localhost:7176/api/func-message-validator \
 
 Response: `400 Bad Request`
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 <a id="architecture"></a>
 
@@ -133,13 +145,17 @@ DemoTwo/
 └── DemoTwo.csproj
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 From the repository root, build with `dotnet build Durable/DemoTwo/DemoTwo.csproj`. In a configured local host, compare valid and invalid names, inspect all three activity calls and confirm the existing final-response defect. This review did not execute the host or the illustrative fix.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Known issue
 
@@ -164,7 +180,9 @@ return new OkObjectResult(output);
 
 The regex permits ASCII letters and whitespace (`\s`), including whitespace beyond ordinary spaces. Missing `name` can pass null to the regex and throw; malformed JSON can fail the orchestrator. The final 400 behavior described above applies when orchestration output reaches the final check, not every possible failure path. No timeout or activity retry policy is configured.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

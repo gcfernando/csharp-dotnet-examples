@@ -1,18 +1,22 @@
-<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-clean-architecture"></a>
-
-[C# and .NET examples](../README.md) · **Application architecture**
-
-<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-layered-architecture"></a>
-
 # MediatR and CQRS with Azure Functions in C#
 
 An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQRS** (Command Query Responsibility Segregation) with a layered architecture and **MediatR pipeline behaviours** for logging and performance monitoring. The solution implements user creation and retrieval through CQRS commands and queries, wired with two MediatR pipeline behaviours.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-features) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Application architecture**
+
+<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-clean-architecture"></a>
+
+<a id="mediatr-cqrs-example-with-azure-functions-in-c-net-8-layered-architecture"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `Mediat/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-features"></a>
 
-## ✨ Features
+<a id="-features"></a>
+
+## Features
 
 ### Projects
 
@@ -26,16 +30,18 @@ An Azure Functions v4 solution on .NET 8 that demonstrates **MediatR** and **CQR
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Running Locally
+## Quick start
 
 ```bash
 cd Mediat/Mediat.AzureFunction
 func start --port 7094
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -68,7 +74,9 @@ func start --port 7094
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### HTTP Endpoints
 
@@ -121,7 +129,9 @@ curl http://localhost:7094/api/user/1
 
 `GET /api/user/{id}` returns `404 Not Found` when no user has that ID, and selected null-request/null-command paths return `400 Bad Request`; malformed JSON and invalid field values are not comprehensively handled.
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 <a id="architecture"></a>
 
@@ -173,13 +183,17 @@ Mediat/
 └── Mediat.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Check restore/build compatibility for `Mediat/Mediat.sln` with its `x64` solution platform, then test create, get, missing ID and restart behavior in a local Functions host. The Release solution configuration lacks a `Build.0` entry for `Mediat.Infrastructure`; inspect Configuration Manager and project-reference build behavior before treating a solution build as evidence for every project. Package references and handlers were inspected; restore, host execution and concurrent requests were not tested here.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### Notes
 
@@ -188,7 +202,9 @@ Check restore/build compatibility for `Mediat/Mediat.sln` with its `x64` solutio
 
 The static `List<User>` and count-based ID allocation are unsynchronized and lose data on restart. Neither name nor email is validated. A null deserialization result gets 400, but malformed JSON exceptions are not caught and converted to 400. The host references MediatR DI extensions 11.0.0 while business/infrastructure use MediatR 12.4.1; package compatibility and restore require separate verification. Start Azurite for the development storage setting.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

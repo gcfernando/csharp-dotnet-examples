@@ -1,14 +1,18 @@
-[C# and .NET examples](../README.md) · **JSON and data**
-
-<a id="jsonpath-query-examples-in-c--newtonsoftjson-selecttokens-patterns-net-6"></a>
-
 # JSONPath Queries in C# with Newtonsoft.Json
 
 A .NET 6 console application demonstrating 14 **JSONPath query patterns in C#** using **Newtonsoft.Json**'s `JObject.SelectTokens` method — wildcards, array indexes, recursive descent, filter expressions with `&&` and `||`, and regular-expression matches. The project serves as a practical reference for navigating complex, nested JSON structures.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **JSON and data**
 
-## 🔎 Overview
+<a id="jsonpath-query-examples-in-c--newtonsoftjson-selecttokens-patterns-net-6"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `JsonSearchPatterns/`. Build the selected project with the SDK and platform declared in its project file.
+
+<a id="-overview"></a>
+
+## Overview
 
 <a id="overview"></a>
 
@@ -16,9 +20,9 @@ JSONPath (via `JObject.SelectTokens`) selects values directly from JSON objects 
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd JsonSearchPatterns
@@ -27,7 +31,9 @@ dotnet run
 
 The application prints the results of each query to the console, separated by blank lines.
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -41,7 +47,9 @@ The application prints the results of each query to the console, separated by bl
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### Query Patterns Demonstrated
 
@@ -75,7 +83,9 @@ The JSON file describes a person with:
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -88,13 +98,17 @@ JsonSearchPatterns/
 └── JsonSearchPatterns.sln
 ```
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 Run the sample from its folder and compare all fourteen queries with Data.json, including the AND/OR and regex filters. Confirm that changing the working directory without the data file produces the documented limitation. The review checked the query strings and file-copy setting; it did not execute the console sample.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -106,7 +120,9 @@ These examples rely on Newtonsoft.Json's built-in JSONPath support through `Sele
 
 `FileHandler` reads `Data.json` relative to the current working directory on every query. Run from this sample folder as shown, or from an output folder containing the copied file; running with --project from an unrelated folder can fail to find it. The application waits for console input after printing results.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 

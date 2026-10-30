@@ -1,25 +1,29 @@
-[C# and .NET examples](../README.md) · **Async programming**
-
-<a id="taskwhenall-exception-handling-in-c--capturing-all-exceptions-net-8"></a>
-
 # Handle Every Task.WhenAll Exception in C#
 
 A .NET 8 console application demonstrating how to **catch every exception from `Task.WhenAll` in C#**, not just the first one, when several concurrent tasks fail.
 
-> **In this guide:** [Get started](#guide-quick-start) · [Walk through the example](#guide-usage) · [Understand the details](#guide-architecture) · [Check the limits](#guide-troubleshooting-and-limitations)
+[C# and .NET examples](../README.md) · **Async programming**
+
+<a id="taskwhenall-exception-handling-in-c--capturing-all-exceptions-net-8"></a>
+
+## Start here
+
+Read the requirements and any configuration below, then follow the usage example. Source paths below are relative to the repository root; run commands from the working directory stated in Usage. This example’s source is in `TaskErrors/`. Build the selected project with the SDK and platform declared in its project file.
 
 <a id="guide-quick-start"></a>
 
-## 🚀 Quick start
+<a id="-quick-start"></a>
 
-### Build and Run
+## Quick start
 
 ```bash
 cd TaskErrors
 dotnet run
 ```
 
-## 📦 Prerequisites and installation
+<a id="-prerequisites-and-installation"></a>
+
+## Prerequisites and installation
 
 ### Requirements
 
@@ -27,7 +31,9 @@ dotnet run
 
 <a id="guide-usage"></a>
 
-## 💡 Usage
+<a id="-usage"></a>
+
+## Usage
 
 ### The Problem
 
@@ -70,7 +76,9 @@ Custom Error Method Two
 
 <a id="guide-architecture"></a>
 
-## 🏗️ Architecture
+<a id="-architecture"></a>
+
+## Architecture
 
 ### Project Structure
 
@@ -83,13 +91,17 @@ TaskErrors/
 
 The expected output follows from the two exception messages in `Program.cs`; execution was not repeated in this review.
 
-## 🧪 Development and testing
+<a id="-development-and-testing"></a>
+
+## Development and testing
 
 From the repository root, `dotnet run --project TaskErrors/TaskErrors.csproj` should print the two messages shown above. Both task definitions and the catch block were inspected; this documentation review did not re-run the application.
 
 <a id="guide-troubleshooting-and-limitations"></a>
 
-## 🛠️ Troubleshooting and limitations
+<a id="-troubleshooting-and-limitations"></a>
+
+## Troubleshooting and limitations
 
 ### FAQ
 
@@ -101,7 +113,9 @@ You can store the `WhenAll` task in a variable, await it inside `try`, and in th
 
 Awaiting WhenAll throws one of the failures; other failures remain stored on the task objects. They are not discarded. This example enumerates each faulted task after awaiting completion; cancellation and nested aggregate handling are not demonstrated.
 
-## 🔗 Related documentation
+<a id="-related-documentation"></a>
+
+## Related documentation
 
 ### Related Examples
 
